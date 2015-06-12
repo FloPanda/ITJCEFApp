@@ -1,13 +1,13 @@
 var resultDiv;
 
-document.addEventListener("deviceready", init, false);
-function init() {
+document.addEventListener("deviceready", init2, false);
+function init2() {
 	document.querySelector("#startScan").addEventListener("touchend", startScan, false);
 	resultDiv = document.querySelector("#results");
 }
 
 function startScan() {
-
+    console.log("coucou");
 	cordova.plugins.barcodeScanner.scan(
 		function (result) {
 			var s = "Result: " + result.text + "<br/>" +

@@ -37,6 +37,7 @@
                                     <label for="user_password">Mot de passe:</label>
                                 </div>
                             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="login()" data-role="none">Connexion</button>
+                            <a href="#scan">Scan</a>
                         </article>
                         <div data-role="popup" id="popupLogin" class="ui-content">
 	                    	<div data-role="header">
@@ -80,27 +81,23 @@
         </div>
         
         </div>
-    
-<!-- page de scan d'un QRCode -->
-        <div data-role="page" id="Scan">
-            <div class= "statusBar">&nbsp;</div>
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Menu</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
+<!-- page de scan d'un QRCode-->
+      <div data-role="page" id="scan" data-dom-cache="false">
+            <div class= "statusBar"></div>
             <p>
-                <button id="startScan">Start Scan</button>
-            </p>
-            <div id="results"></div>
+            <button id="startScan">Start Scan</button>
+        </p>
+        <div id="results"></div>
         </div>
+
       
 <!-- import des scripts -->       
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.0.min.js"></script>
         <script type="text/javascript" src="js/mustache.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
+      <!--  <script type="text/javascript" src="js/app.js"></script> -->
         <script type="text/javascript" src="js/main.js"></script>
+        <script>init();</script>
     </body>
 </html>
