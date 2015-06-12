@@ -710,4 +710,5 @@ function startScan() {
 			alert("Scanning failed: " + error);
 		}
 	);
+}
     
