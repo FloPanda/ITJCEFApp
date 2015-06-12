@@ -180,6 +180,7 @@ function openSubscription(){
 }
 
 function openScan() {
+    $(':mobile-pageconatiner').pagecontainer('change','#Scan');
 document.querySelector("#startScan").addEventListener("touchend", startScan, false);
 	resultDiv = document.querySelector("#results");
 }
