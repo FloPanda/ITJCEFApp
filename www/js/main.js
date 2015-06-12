@@ -2,6 +2,7 @@
 //var host = "http://localhost:8888/ITJCEFCarte/Site";
 var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
 //var host = "../../../ITJCEFCarte/Site";
+var resultDiv;
 
 
 function init() {
@@ -179,7 +180,8 @@ function openSubscription(){
 }
 
 function openScan() {
-    $(':mobile-pagecontainer').pagecontainer('change','#Scan');
+document.querySelector("#startScan").addEventListener("touchend", startScan, false);
+	resultDiv = document.querySelector("#results");
 }
 
 //fonction appelée par init qui vérifie si nous avons des identifiants, nous connecte le cas échéant ou nous propose de nous connecter
