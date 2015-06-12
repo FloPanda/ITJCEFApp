@@ -10,6 +10,78 @@
     </head>
 
     <body>
+<!-- page inutile qui attend juste que tout soit opérationnel -->
+        <div data-role="page" id="launching" data-dom-cache="false">
+            <div class= "statusBar"></div>
+        </div>
+<!-- page de connexion si l'utilisateur n'a pas d'identifiant enregistré ou si celui-ci ne fonctionne plus -->
+        <div data-role="page" id="login">
+            <div class= "statusBar">&nbsp;</div>
+
+                    <div data-role="header" id="mainHeader">
+                        <div class="maxWidth">
+                            <hgroup>
+                                <h1>App JCEF</h1>
+                                <p>Bienvenue sur l'App de JCEF de Shanghai !</p>
+                            </hgroup>
+                        </div>
+                    <div data-role="content" id="content">
+                        <article id="connexionForm" class="component">
+                            <header>
+                                <h2>Connectez-vous</h2>
+                            </header>
+                                <div data-role="fieldcontain" class="ui-hide-label">
+                                    <input type="text" class="largeInput" id="user_uuid" value="" placeholder="Identifiant" />
+                                    <label for="user_uuid">Identifiant:</label>
+                                    <input type="password" class="largeInput" id="user_password" value="" placeholder="Mot de passe" /> <br/>
+                                    <label for="user_password">Mot de passe:</label>
+                                </div>
+                            <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="login()" data-role="none">Connexion</button>
+                        </article>
+                        <div data-role="popup" id="popupLogin" class="ui-content">
+	                    	<div data-role="header">
+		                    	<h1>My dialog heading</h1>
+		                    </div>
+		                    <div data-role="content">
+			                    <p>Content goes here.</p>
+			                </div>
+			            </div>
+                        <article id="otherPossibilities" class="component">
+                            <header>
+                                <h2></h2>
+                            </header>
+                            <div class="smallButtonBar">
+                                <div class="smallButtonBarItem">
+                                    <a href="#subscription" class="smallButtonBarItemButton" data-role="none">Inscription</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <footer>
+                            <p>visitez notre <a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">site internet</a> </p>
+                            <div class="copyright">
+                                JCEF-Shanghai, 2015, tous droits réservés
+                            </div>
+                        </footer>
+                    </div>
+                    </div>
+        <!-- popup modèle -->
+            <div data-role="popup" class="popupBasic">
+            	<h2></h2>
+            	<p></p>       
+            	<a data-inline="true" data-role="button" data-rel="back" href="#">Ok</a>        
+            </div>
+        
+        <div data-role="popup" class="modalBasic">
+            <h2></h2>
+	        <p></p>
+            <a id="kobutton" data-inline="true" data-role="button" href="#">Annuler</a>
+            <a id="okbutton" data-inline="true" data-role="button" href="#">Confirmer</a>
+        </div>
+        
+        </div>
+    
+<!-- page de scan d'un QRCode -->
         <div data-role="page" id="Scan">
             <div class= "statusBar">&nbsp;</div>
             <div data-role="header" role="banner">
@@ -22,8 +94,7 @@
             </p>
             <div id="results"></div>
         </div>
-
-       
+      
 <!-- import des scripts -->       
         <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.4.0.min.js"></script>
