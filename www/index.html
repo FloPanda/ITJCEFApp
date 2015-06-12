@@ -30,8 +30,8 @@
             <link rel="stylesheet" href="js/jquery.mobile..structure-1.4.0.min.css" />
             <script src="js/jquery-1.10.2.min.js"></script>
             <script src="js/jquery.mobile-1.4.0.min.js"></script>
-            <!-- importation du bibliothèque cordova ( phoneGap ) 
-            <script src="phonegap.js"></script>-->
+            <!-- importation du bibliothèque cordova ( phoneGap ) -->
+            <script src="phonegap.js"></script>
             <script src="js/mustache.js"></script>
             <script src="js/main.js"></script>
             <script>
@@ -289,12 +289,34 @@
              <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openMyProfil();" data-role="none">Mon profil</button>
              <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEvTrombi();" data-role="none">Évènements</button>
              <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openComTrombi();" data-role="none">Commissions</button>
+             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openScan();" data-role="none">Scanner</button>
            </div>
 
                 
                 
             </div>
 
+
+ <div data-role="page" id="Scan">
+            <div class= "statusBar">&nbsp;</div>
+
+            <div data-role="header" role="banner">
+                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
+                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Menu</h1>
+                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
+                
+            </div>     
+        
+           <p>
+    <button id="startScan" onclick="startScan()">Start Scan</button>
+    </p>
+
+    <div id="results"></div>
+
+                
+                
+            </div>
+            
 
 
         <!-- pade de profil utilisateur -->

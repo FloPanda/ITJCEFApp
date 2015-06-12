@@ -178,6 +178,10 @@ function openSubscription(){
     $(':mobile-pagecontainer').pagecontainer('change', '#subscription');
 }
 
+function openScan() {
+    $(':mobile-pagecontainer').pagecontainer('change','#Scan');
+}
+
 //fonction appelée par init qui vérifie si nous avons des identifiants, nous connecte le cas échéant ou nous propose de nous connecter
 function deviceReady() {
     $(document).on("pageshow", "#launching", function(event, ui){
@@ -692,3 +696,18 @@ function drawTrombiUsers() {
 //fonction affichant le détail d'un utilisateur
 function drawUserDetails() {
 }
+
+function startScan() {
+
+	cordova.plugins.barcodeScanner.scan(
+		function (result) {
+			var s = "Result: " + result.text + "<br/>" +
+			"Format: " + result.format + "<br/>" +
+			"Cancelled: " + result.cancelled;
+			resultDiv.innerHTML = s;
+		}, 
+		function (error) {
+			alert("Scanning failed: " + error);
+		}
+	);
+    
