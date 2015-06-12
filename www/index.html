@@ -1,50 +1,24 @@
 <!DOCTYPE html>
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
- 
- http://www.apache.org/licenses/LICENSE-2.0
- 
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
 <html>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Appli JCEF</title>
-            <link rel="stylesheet" type="text/css" href="css/JCEF-Mobile-Theme.min.css" />
-            <link rel="stylesheet" href="js/jquery.mobile.icons.min.css" />
-            <link rel="stylesheet" href="js/jquery.mobile..structure-1.4.0.min.css" />
-            <script src="js/jquery-1.10.2.min.js"></script>
-            <script src="js/jquery.mobile-1.4.0.min.js"></script>
-            <!-- importation du bibliothèque cordova ( phoneGap ) -->
-            <script src="phonegap.js"></script>
-            <script src="js/mustache.js"></script>
-            <script src="js/main.js"></script>
-            <script>
-                init();
-            </script>
-            </head>
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+    </head>
+
     <body>
-<!-- page inutile qui attend juste que tout soit opérationnel -->
-        <div data-role="page" id="launching" data-dom-cache="false">
-            <div class= "statusBar"></div>
-        </div>
-        
+    <div data-role="page" id="startPage">
+        <a id="callScanPage" href="#scanPage">aller</a>
+        <a id="callLoginPage" href="#loginPage">Login</a>
+        <a id="callMenuPage" href="#menuPage">Menu</a>
+    </div>
+
 <!-- page de connexion si l'utilisateur n'a pas d'identifiant enregistré ou si celui-ci ne fonctionne plus -->
-        <div data-role="page" id="login">
+        <div data-role="page" id="loginPage">
             <div class= "statusBar">&nbsp;</div>
 
                     <div data-role="header" id="mainHeader">
@@ -109,150 +83,31 @@
         </div>
         
         </div>
-                    
-
-            <!-- popup modèle -->
-        <div data-role="popup" class="popupBasic">
-            	<h2></h2>
-            	<p></p>       
-            	<a data-inline="true" data-role="button" data-rel="back" href="#">Ok</a>        
-            </div>
-        
-        <div data-role="popup" class="modalBasic">
-            <h2></h2>
-	        <p></p>
-            <a id="kobutton" data-inline="true" data-role="button" href="#">Annuler</a>
-            <a id="okbutton" data-inline="true" data-role="button" href="#">Confirmer</a>
-        </div>
-        
-        
-        
-
-        
-        
-
-        
-<!-- page regroupant les settings du compte -->
-        <div data-role="page" id="settings">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openScanBarcode();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Paramètres du comptes</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
-            
-            <p>
-            <div id="account">
-                Vous êtes connectés avec le compte de
-            </div>
-            <br/>
-            <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all" onclick="logout();" data-role="none">Se déconnecter</button>
-            </p>
-            <div class="footer">
-                <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com">
-                     http://dev-app.jcef-shanghai.com</a> </p>
-            </div>
-            <!-- popup modèle -->
-            <div data-role="popup" class="popupBasic">
-            	<h2></h2>
-            	<p></p>       
-            	<a data-inline="true" data-role="button" data-rel="back" href="#">Ok</a>        
-            </div>
-        
-        <div data-role="popup" class="modalBasic">
-            <h2></h2>
-	        <p></p>
-            <a id="kobutton" data-inline="true" data-role="button" href="#">Annuler</a>
-            <a id="okbutton" data-inline="true" data-role="button" href="#">Confirmer</a>
-        </div>
-        
-        </div>
-        
-        
-<!-- formulaire d'inscription -->
-        <div data-role="page" id="subscription">
+    
+<!-- Menu utilisateur -->
+        <div data-role="page" id="menuPage">
             <div class= "statusBar">&nbsp;</div>
 
             <div data-role="header" role="banner">
                 <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Inscription</h1>
+                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Menu</h1>
                 <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
-            
-            
+                <a class="ui-btn-right  ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
+            </div>     
         
-            <div id='subscriptionForm'>
-                <form method="post"> <!-- TODO : gérer l'envoi de ce formulaire -->
-                    <fieldset>
-                        
-                        <label for="user_name" class="subscribe">Nom :</label><br/>
-                            <input type="text" name="user_name" id="user_name" size="25" required placeholder="Requis"><br/>
-                        <label for="user_surname" class="subscribe">Prénom :</label><br/>
-                            <input type="text" name="user_surname" id="user_surname" size="25" required placeholder="Requis"><br/>
-                        <label for="user_jcef_function" class="subscribe">Fonction :</label><br/>
-                            <input type="text" name="user_jcef_function" id="user_jcef_function" size="25" required placeholder="Requis"><br/>
-                        <label for="user_nation" class="subscribe">Nationalité :</label><br/>
-                            <input type="text" name="user_nation" id="user_nation" size="25" required placeholder="Requis"><br/>
-                        <label for="user_company_title" class="subscribe">Entreprise :</label><br/>
-                            <input type="text" name="user_company_title" id="user_company_title" size="25" required placeholder="Requis"><br/>
-                        <label for="user_subscription_date" class="subscribe">Date d'inscription :</label><br/>
-                            <input type="text" name="user_subscription_date" id="user_subscription_date" size="25" required placeholder="Requis"><br/>
-                        <label for="user_birth" class="subscribe">Date de naissance :</label><br/>
-                            <input type="text" name="user_birth" id="user_birth" size="25" required placeholder="Requis"><br/>
-                        <label for="user_sex" class="subscribe">Sexe :</label><br/>
-                            <input type="text" name="user_sex" id="user_sex" size="25" required placeholder="Requis"><br/>
-                        <label for="user_qr_code_url" class="subscribe">QR Code :</label><br/>
-                            <input type="text" name="user_qr_code_url" id="user_qr_code_url" size="25" required placeholder="Requis"><br/>
-                        <label for="user_weixin" class="subscribe">Wechat :</label><br/>
-                            <input type="text" name="user_weixin" id="user_weixin" size="25" required placeholder="Requis"><br/>
-                        <label for="user_skype" class="subscribe">Skype :</label><br/>
-                            <input type="text" name="user_skype" id="user_skype" size="25" required placeholder="Requis"><br/>
+           <div id='Boutons'>
+             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openUsrTrombi();" data-role="none">Trombinoscope</button>
+             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openMyProfil();" data-role="none">Mon profil</button>
+             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEvTrombi();" data-role="none">Évènements</button>
+             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openComTrombi();" data-role="none">Commissions</button>
+             <a href="#scanPage">Scanner</a>
+           </div>
 
-
-
-                        <label for="user_email_jcef" class="subscribe">Email JCEF :</label><br/>
-                                <input type="email" name="user_email_jcef" id="user_email_jcef" size="25" required placeholder="Requis"><br/>
-                        <label for="user_email_perso" class="subscribe">Email Perso :</label><br/>
-                                <input type="email" name="user_email_perso" id="user_email_perso" size="25" required placeholder="Requis"><br/>
-                        <label for="user_email_company" class="subscribe">Email Entreprise :</label><br/>
-                                <input type="email" name="user_email_company" id="user_email_company" size="25" required placeholder="Requis"><br/>                
-                        <label for="user_land_phone" class="subscribe">Téléphone Fixe :</label><br/>
-                                <input type="tel" name="user_land_phone" id="user_land_phone" size="25" required placeholder="Requis"><br/>
-                        <label for="user_cell_phone" class="subscribe">Téléphone Mobile :</label><br/>
-                                <input type="tel" name="user_cell_phone" id="user_cell_phone" size="25" required placeholder="Requis"><br/>        
-                    </fieldset>
-                    
-                    <a id="subscribe" data-role="button" onclick="subscribe();"> S'inscrire </a>    
-                </form>
-            </div>
-            <div class="smallItem">
+                
                 
             </div>
-            <div class ="footer">
-                <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">
-                    http://dev-app.jcef-shanghai.com</a> </p>  
-            </div>
-            <!-- popup modèle -->
-            <div data-role="popup" class="popupBasic">
-            	<h2></h2>
-            	<p></p>       
-            	<a data-inline="true" data-role="button" data-rel="back" href="#">Ok</a>        
-            </div>
-        
-        <div data-role="popup" class="modalBasic">
-            <h2></h2>
-	        <p></p>
-            <a id="kobutton" data-inline="true" data-role="button" href="#">Annuler</a>
-            <a id="okbutton" data-inline="true" data-role="button" href="#">Confirmer</a>
-        </div>
-        
-        </div>
 
-
-
-
-        <!-- trombinoscope utilisateur -->
+<!-- trombinoscope utilisateur -->
         <div data-role="page" id="users_trombinoscope">
             <div class= "statusBar">&nbsp;</div>
 
@@ -271,54 +126,7 @@
                 
             </div>
 
-
-        <!-- Dashboard utilisateur -->
-        <div data-role="page" id="menu">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Menu</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-                <a class="ui-btn-right  ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>     
-        
-           <div id='Boutons'>
-             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openUsrTrombi();" data-role="none">Trombinoscope</button>
-             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openMyProfil();" data-role="none">Mon profil</button>
-             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEvTrombi();" data-role="none">Évènements</button>
-             <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openComTrombi();" data-role="none">Commissions</button>
-             <a href="Scan.html">Scanner</a>
-           </div>
-
-                
-                
-            </div>
-
-
- <div data-role="page" id="scan">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Menu</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-                
-            </div>     
-        
-           <p>
-    <button id="startScan" onclick="startScan()">Start Scan</button>
-    </p>
-
-    <div id="results"></div>
-
-                
-                
-            </div>
-            
-
-
-        <!-- pade de profil utilisateur -->
+<!-- pade de profil utilisateur -->
         <div data-role="page" id="user_profil">
             <div class= "statusBar">&nbsp;</div>
 
@@ -333,71 +141,71 @@
 
         
             <div id='userDetails'>
-               <p>
+               <div>
                 <div id="user_picture">             
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_surname">
                     Prénom : <span id="userVisuSurname"></span>
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_name">
                     Nom :  
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_jcef_function">
                     Fonction : 
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_nation">
                     Pays : 
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_company">
                     Entreprise : 
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_subscription_date">
                     Inscription : 
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_email_jcef">
                     Email JCEF :
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_birth">
                     Naissance :
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_sex">
                     Sexe : 
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_skype">
                     Skype : 
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_weixin">
                     WeChat : 
                 </div>
-                </p>
-                <p>
+                </div>
+                <div>
                 <div id="user_qr_code_url">
                     QRCode : 
                     <img src="https://chart.googleapis.com/chart?cht=qr&chl='.$user_concerned->user_qr_code_url.'&chs=100x100&choe=UTF-8&chld=L|2" alt="">
                 </div>
-                </p>
+                </div>
             </div> 
             <div class="smallItem">
                 
@@ -406,263 +214,19 @@
                 <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">
                     http://dev-app.jcef-shanghai.com</a> </p>  
             </div>
+		</div>
+    
+<!-- page de lancement du scan d'un QRCode -->   
+    <div data-role="page" id="scanPage">
+        <p>
+        <a id="back" href="#startPage">retour</a>
+        <button id="startScan">Start Scan</button>
+        </p>
 
+        <div id="results"></div>
+    </div>
 
-
-
-
-            <!-- Edition profil utilisateur -->
-        <div data-role="page" id="edit_user">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Edition du Profil</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
-                
-       
-           <form action='../../Site/Controller/user_update.php' method='POST' onsubmit="openUserProfil()">
-                <p>
-                <div id="user_picture">
-                <input type="file" name="user_picture" value="">                    
-                </div>
-                </p>
-                
-                    Prénom :
-                    <input type="text" name="user_surname" value="">
-                
-                <p>
-                <div id="user_name">
-                    Nom :
-                    <input type="text" name="user_name" value="">
-                </div>
-                </p>
-                <p>
-                <div id="user_jcef_function">
-                    Fonction :
-                    <input type="text" name="user_jcef_function" value=""> 
-                </div>
-                </p>
-                <p>
-                <div id="user_nation">
-                    Pays :
-                    <input type="text" name="user_nation" value=""> 
-                </div>
-                </p>
-                <p>
-                <div id="user_company">
-                    Entreprise :
-                    <input type="text" name="user_company" value=""> 
-                </div>
-                </p>
-                <p>
-                <div id="user_subscription_date">
-                    Inscription :
-                    <input type="date" name="user_subscription_date" value=""> 
-                </div>
-                </p>
-                <p>
-                <div id="user_email_jcef">
-                    Email JCEF :
-                    <input type="text" name="user_email_jcef" value="">
-                </div>
-                </p>
-                <p>
-                <div id="user_birth">
-                    Naissance :
-                    <input type="date" name="user_birth" value="">
-                </div>
-                </p>
-                <p>
-                <div id="user_sex">
-                    Sexe :
-                    <input type="text" name="user_sex" value=""> 
-                </div>
-                </p>
-                <p>
-                <div id="user_skype">
-                    Skype :
-                    <input type="text" name="user_skype" value=""> 
-                </div>
-                </p>
-                <p>
-                <div id="user_weixin">
-                    WeChat :
-                    <input type="text" name="user_weixin" value=""> 
-                </div>
-                </p>
-                <p>
-                <input type="submit" name="submit" value="Valider">
-                </p>
-            </form>
-                <!--</div>-->
-                
-           
-                
-                
-            </div>
-            <div class="smallItem">
-                
-            </div>
-            <div class ="footer">
-                <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">
-                    http://dev-app.jcef-shanghai.com</a> </p>  
-            </div>
-
-
-
-
-
-
-
-             <!-- pade de profil event -->
-        <div data-role="page" id="event_profil">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Profil Evenement</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
-                
-            <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEditEventProfil()" data-role="none">Editer</button>
-
-            <div id='userDetails'></div>
-            <div class="smallItem">
-                
-            </div>
-            <div class ="footer">
-                <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">
-                    http://dev-app.jcef-shanghai.com</a> </p>  
-            </div>
-
-
-
-
-
-
-
-            <!-- pade de profil commission -->
-        <div data-role="page" id="commission_profil">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Profil Commission</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
-                
-            <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEditCommissionProfil()" data-role="none">Editer</button>
-
-
-           
-            
-        
-           <!-- <div id='profilDiv'>-->
-                <div id="com_picture">                    
-                </div>
-                <div id="com_name">
-                    Nom : 
-                </div>
-                <div id="com_description">
-                    Description : 
-                </div>
-
-                
-                <!--</div>-->
-
-                
-                
-            </div>
-            <div class="smallItem">
-                
-            </div>
-            <div class ="footer">
-                <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">
-                    http://dev-app.jcef-shanghai.com</a> </p>  
-            </div>
-
-
-
-
-
-
-
-
-             <!-- Edition commission -->
-        <div data-role="page" id="edit_commission">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Edition de la Commission</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
-                
-       
-           <form action='../../Site/Controller/commission_update.php' method='POST' onsubmit="openCommissionProfil()">
-                <p>
-                <div id="com_picture">
-                <input type="file" name="com_picture" value="">                    
-                </div>
-                </p>
-                <div id="com_name">
-                    Nom :
-                    <input type="text" name="com_name" value="">
-                </div>
-                <p>
-                <div id="com_description">
-                   Description :
-                    <textarea name="com_description"></textarea>
-                </div>
-                </p>
-                
-            </form>
-                <!--</div>-->
-                
-           
-                
-                
-            </div>
-            <div class="smallItem">
-                
-            </div>
-            <div class ="footer">
-                <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">
-                    http://dev-app.jcef-shanghai.com</a> </p>  
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!-- popup modèle -->
-            <div data-role="popup" class="popupBasic">
-                <h2></h2>
-                <p></p>       
-                <a data-inline="true" data-role="button" data-rel="back" href="#">Ok</a>        
-            </div>
-        
-        <div data-role="popup" class="modalBasic">
-            <h2></h2>
-            <p></p>
-            <a id="kobutton" data-inline="true" data-role="button" href="#">Annuler</a>
-            <a id="okbutton" data-inline="true" data-role="button" href="#">Confirmer</a>
-        </div>
-        
-        
-
-
-
-
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
     </body>
 </html>
