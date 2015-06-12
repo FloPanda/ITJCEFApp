@@ -7,8 +7,8 @@ function init() {
 }
 
 function startScan() {
-    console.log('dedans startScan');
-	phonegap.plugins.barcodeScanner.scan(
+
+	cordova.plugins.barcodeScanner.scan(
 		function (result) {
 			var s = "Result: " + result.text + "<br/>" +
 			"Format: " + result.format + "<br/>" +
