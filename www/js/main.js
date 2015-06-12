@@ -181,7 +181,6 @@ function openSubscription(){
 
 function openScan() {
     $(':mobile-pagecontainer').pagecontainer('change','#Scan');
-document.querySelector("#startScan").addEventListener("touchend", startScan, false);
 	resultDiv = document.querySelector("#results");
 }
 
@@ -701,7 +700,7 @@ function drawUserDetails() {
 }
 
 function startScan() {
-
+    console.log("dedansstartScan");
 	phonegap.plugins.barcodeScanner.scan(
 		function (result) {
 			var s = "Result: " + result.text + "<br/>" +
