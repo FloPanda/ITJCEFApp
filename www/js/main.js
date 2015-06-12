@@ -707,9 +707,11 @@ function startScan() {
 			"Format: " + result.format + "<br/>" +
 			"Cancelled: " + result.cancelled;
 			resultDiv.innerHTML = s;
+            console.log("dedans le plugin");
 		}, 
 		function (error) {
 			alert("Scanning failed: " + error);
+            console.log("dans le cas d'erreur");
 		}
 	);
 }
