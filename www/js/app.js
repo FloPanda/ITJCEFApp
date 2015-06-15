@@ -101,6 +101,11 @@ function openMenu(){
 
 //fonction appelée ailleurs pour ouvrir proprement la page trombinoscope des utilisateurs
 function openUsrTrombi(){
+    WStrombinoscope_users();
+    window.localStorage["currentPage"]="userTrombiPage";
+    $.mobile.pageContainer.pagecontainer('change', "#users_trombinoscope");
+    afficheMenu();
+    drawTrombiUsers();
 }
 
 //fonction appelée ailleurs pour ouvrir proprement la page trombinoscope des prochains events
@@ -223,7 +228,6 @@ function WStrombinoscope_users(){
             url: URL,
             contentType: "application/json",
             dataType: "json",
-            beforeSend: setHeader,
             async: false,
             statusCode: {
                 200: function (res) {
@@ -302,10 +306,7 @@ function WSuser_profil(user_uuid){
         $.ajax({
             type: 'GET',
             url: URL+"?user_uuid="+user_uuid,
-            //contentType: "application/json",
             dataType: "json",
-            beforeSend: setHeader,
-            //data: data,
             async: false,
             statusCode: {
                 200: function (res) {
