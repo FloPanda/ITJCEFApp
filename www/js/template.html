@@ -1,0 +1,82 @@
+<!-- Page regroupant les templates utilisés ailleurs -->
+
+
+
+<!-- template appelé par le trombinoscope des utilisateurs-->
+<script type="text/html" id="tpl-trombiUsers">          
+    {{#user_list}} 
+        
+            <article>
+                <header>
+                    <h2>{{user_name}}</h2>
+                </header>
+                <div class= "contentDesc">
+                    <ul class="contentAttribute">
+                        <li>user_uuid : {{user_uuid}}</li>
+                        <li>user_name : {{user_name}}</li>
+                        <li>user_surname : {{user_surname}}</li>
+                        <li>user_jcef_function : {{user_jcef_function}}</li>
+                        <li>user_picture : {{user_picture}}</li>
+                        <li>user_nation : {{user_nation}}</li>
+                        <li>user_company : {{user_company}}</li>
+                        <li>user_email_jcef : {{user_email_jcef}}</li>
+                        <li>user_subscription_date : {{user_subscription_date}}</li>
+                        <li>user_user_type : {{user_user_type}}</li>
+                        <li>user_member_type : {{user_member_type}}</li>
+                    </ul>
+                        <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openUserProfilDirect({{user_uuid}})" data-role="none">Voir le profil complet</button>
+                </div>
+            </article>
+        
+    {{/user_list}}
+    <br/>
+</script>
+   
+<!-- template appelé par le trombinoscope des utilisateurs -->
+    <script type="text/html" id="tpl-trombiEvents">          
+    {{#ev_list}}   
+            <article>
+                <header>
+                    <h2>{{ev_name}}</h2>
+                </header>
+                <div class= "contentDesc">
+                    <ul class="contentAttribute">
+                        <li>ev_pk : {{ev_pk}}</li>
+                        <li>ev_name  : {{ev_name}}</li>
+                        <li>ev_address  : {{ev_address}}</li>
+                        <li>ev_date  : {{ev_date}}</li>
+                        <li>ev_description  : {{ev_description}}</li>
+                        <li>ev_picture  : {{ev_picture}}</li>
+                    </ul>
+                        <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="" data-role="none">Voir l'évènement</button>
+                </div>
+            </article>
+    {{/ev_list}}
+    <br/>
+</script>
+
+
+
+<!-- template d'une popup -->
+<script typr="text/html" id="tpl-PopUp">
+    <div data-role="popup" id="popupLogin" class="ui-content">
+		<div data-role="header">
+			<h1>My dialog heading</h1>
+		</div>
+		<div data-role="content">
+			<p>Content goes here.</p>
+		</div>
+    </div>
+</script>
+
+<!-- template d'une modale -->
+<script typr="text/html" id="tpl-Modal">
+    <div data-role="popup" id="popupLogin" class="ui-content">
+		<div data-role="header">
+			<h1>My dialog heading</h1>
+		</div>
+		<div data-role="content">
+			<p>Content goes here.</p>
+		</div>
+    </div>
+</script>

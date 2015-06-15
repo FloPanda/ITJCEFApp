@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="js/jquery/jquery.mobile-1.4.5.min.css" />
         <script src="js/jquery/jquery-1.11.1.min.js"></script>
         <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>
+        <script src="js/mustache.js"></script>
         <link rel="stylesheet" type="text/css" href="css/index.css" />
     </head>
 
@@ -70,7 +71,7 @@
                         </footer>
                     </div>
         </div>
-<!-- popup modèle -->
+<!-- popup modèle 
         <div data-role="popup" class="popupBasic">
             	<h2></h2>
             	<p></p>       
@@ -83,6 +84,7 @@
             <a id="kobutton" data-inline="true" data-role="button" href="#">Annuler</a>
             <a id="okbutton" data-inline="true" data-role="button" href="#">Confirmer</a>
         </div>
+-->
             
 <!-- Menu utilisateur -->
         <div data-role="page" id="menuPage">
@@ -99,7 +101,7 @@
 
 <!-- Page de listing des prochains évènements affichée après le login -->
         <div data-role="page" id="eventTrombiPage">
-            
+            <div role='main' id='trombiEvents'></div>
         </div>
 
 <!-- trombinoscope utilisateur -->

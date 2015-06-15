@@ -3,7 +3,7 @@ var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
 var resultDiv;
 var clickTouch;
 var debug = true;
-var device = false;
+var device = true;
 
 
 //!!!!!! SECTION Initialisation
@@ -37,7 +37,7 @@ function onGlobal() {
     log("dans on Global");
     $(document).on("pageshow", "#login", function () {
                 window.localStorage["currentPage"]="login";
-                if (checkPreAuth()) {openMenu();}
+                if (checkPreAuth()) {openEvTrombi();}
                 afficheMenu();
                    });
 
@@ -105,6 +105,11 @@ function openUsrTrombi(){
 
 //fonction appelée ailleurs pour ouvrir proprement la page trombinoscope des prochains events
 function openEvTrombi(){
+    WStrombinoscope_events();
+    window.localStorage["currentPage"]="eventTrombiPage";
+    $.mobile.pageContainer.pagecontainer('change', "#eventTrombiPage");
+    afficheMenu();
+    drawTrombiEvents();
 }
 
 //fonction appelée ailleurs pour ouvrir proprement la page trombi des commissions
@@ -183,7 +188,7 @@ function login(){
                //window.localStorage["user_is_admin"] = a;
                window.localStorage["token"]=res.token;
                window.localStorage["expireAt"]=res.expireAt;
-               openMenu(); 
+               openEvTrombi(); 
                },
                401 : function(){
                self.showAlert(current,"Connexion impossible, le couple identifiant/mot de passe n'a pas été reconnu", "erreur");
@@ -205,6 +210,120 @@ function login(){
 	   //		$('#popupLogin').popup("open");
 
 	    }
+    return false;
+}
+
+//A MODIF. Affiche trombi user.
+function WStrombinoscope_users(){
+    var URL = host +"/Controller/WStrombinoscope.php";
+    var contentElem;
+    
+        $.ajax({
+            type: 'GET',
+            url: URL,
+            contentType: "application/json",
+            dataType: "json",
+            beforeSend: setHeader,
+            async: false,
+            statusCode: {
+                200: function (res) {
+                    var strObj = JSON.stringify(res);
+                    window.localStorage["users"] = strObj;        
+                    },
+                404: function(){
+                    self.showAlert(current, "serveur introuvable, le serveur est hors ligne", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+            });
+    return false;
+}
+
+//A MODIF. Affiche trombi commissions.
+function WStrombinoscope_commissions(){
+    var URL = host +"/Controller/WStrombinoscope_commissions.php";
+    var contentElem; 
+        $.ajax({
+            type: 'GET',
+            url: URL,
+            contentType: "application/json",
+            dataType: "json",
+            async: false,
+            statusCode: {
+                200: function (res) {
+                    var strObj = JSON.stringify(res);
+                    window.localStorage["commissions"] = strObj;        
+                    },
+                404: function(){
+                    self.showAlert(current, "serveur introuvable, le serveur est hors ligne", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+            });
+    return false; 
+}
+
+//A MODIF. Affiche trombi events.
+function WStrombinoscope_events(){
+    var URL = host +"/Controller/WStrombinoscope_events.php";
+    var contentElem;
+    
+        $.ajax({
+            type: 'GET',
+            url: URL,
+            contentType: "application/json",
+            dataType: "json",
+            async: false,
+            statusCode: {
+                200: function (res) {
+                    var strObj = JSON.stringify(res);
+                    window.localStorage["events"] = strObj;        
+                    },
+                404: function(){
+                    self.showAlert(current, "serveur introuvable, le serveur est hors ligne", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+            });
+    return false; 
+}
+
+//A MODIF fonction qui récupère le contenu associé à un user_uuid appelée depuis user_profil.html
+function WSuser_profil(user_uuid){
+    var URL = host + "/Controller/WSuser_profil.php";
+    var contentElem;
+    //if(user != '') {
+        $.ajax({
+            type: 'GET',
+            url: URL+"?user_uuid="+user_uuid,
+            //contentType: "application/json",
+            dataType: "json",
+            beforeSend: setHeader,
+            //data: data,
+            async: false,
+            statusCode: {
+                200: function (res) {
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    $('#userVisuSurname').html( res.user_surname ).enhanceWithin();
+                    window.localStorage["selected_user_profil"] = JSON.stringify(res);
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
     return false;
 }
 
@@ -252,6 +371,17 @@ function checkPreAuth() {
     }
 }
 
+//fonction de déconnexion !TODO : savoir où je suis
+function logout() {
+	var current=$("#account");
+    self.showModal(current, "Souhaitez-vous vraiment vous déconnecter ?", "information", function () {
+        self.showAlert(current, "Déconnexion en cours", "information");
+        sessionStorage.clear();
+        localStorage.clear();
+        openLogin();
+    });
+}
+
 //!!!!!! SECTION Mise en forme des pages
 //Ajout du header et du menu commun à toutes les pages
 $(function () {
@@ -278,4 +408,84 @@ function afficheMenu(){
         ul.append(items);
         ul.listview().listview('refresh');
     }
+}
+
+//fonction qui permet d'afficher une alerte même si le système natif n'est pas accessible
+function showAlert(current, message, title) {
+    if (navigator.notification) {
+        navigator.notification.alert(message, null, title, 'OK');
+    } else {
+   	//var popup= $("#popupBasic");
+   	var popup = current.parents('div[data-role="page"]').find(".popupBasic");
+   	popup.find("h2").html(title);
+   	popup.find("p").html(message);
+   	popup.popup();
+   	popup.popup("open", null);
+    }
+}
+
+function showModal(current, message, title,confirm, cancel) {
+    if (navigator.notification) {
+        navigator.notification.confirm(
+                                       message,
+                                       onconfirm,
+                                       title,
+                                       'OK, annuler');
+        
+    } else {
+    	var initpopup = current.parents('div[data-role="page"]').find(".modalBasic");
+        var popup = initpopup.clone();
+        initpopup.after(popup);
+        var id = "m_" + Math.floor(Math.random() * 20000);
+        popup.attr("id", id);
+        popup.attr("class","");
+
+        $("#" + id).find("h2").html(title);
+        $("#" + id).find("p").html(message);
+        $("#" + id).popup();
+        $("#" + id + " #okbutton").on("click", function () {
+            if (confirm) {
+                confirm();
+            }
+        });
+        $("#" + id + " #kobutton").on("click", function () {
+            $("#" + id).popup('close');
+            if (cancel) {
+                cancel();
+            }
+        });
+        $("#" + id).popup("open", { role: "dialog"});
+    }
+}
+
+//Fonction chargée de dessiner le trombinoscope
+// TODO : rendre propre la mise en forme et choisir les éléments à afficher.
+// à faire dans le fichier template.html
+function drawTrombiUsers() {
+    $('#trombiUsers').html('');
+    if (window.localStorage["users"]!= undefined){
+        $.get('js/template.html', function(template) {
+              // charge le fichier templates et récupère le contenu de la
+              var users = JSON.parse(window.localStorage["users"]);
+              var template = $(template).filter('#tpl-trombiUsers').html();
+              var html = Mustache.to_html(template, users);
+              $('#trombiUsers').html(html).trigger('create');
+              },'html');}
+    
+}
+
+//Fonction chargée de dessiner le trombi des events à venir
+function drawTrombiEvents() {
+    log("dans trombiEvents");
+        $('#trombiEvents').html('');
+    if (window.localStorage["events"]!= undefined){
+        log("events trouvés");
+        $.get('js/template.html', function(template) {
+            log("fichier trouvé");
+              // charge le fichier templates et récupère le contenu de la
+              var users = JSON.parse(window.localStorage["events"]);
+              var template = $(template).filter('#tpl-trombiEvents').html();
+              var html = Mustache.to_html(template, users);
+              $('#trombiEvents').html(html).trigger('create');
+              },'html');}
 }
