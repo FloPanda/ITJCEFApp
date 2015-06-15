@@ -3,7 +3,7 @@ var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
 var resultDiv;
 var clickTouch;
 var debug = true;
-var device = true;
+var device = false;
 
 
 //!!!!!! SECTION Initialisation
@@ -36,48 +36,88 @@ function init() {
 function onGlobal() {
     log("dans on Global");
     $(document).on("pageshow", "#login", function () {
+                window.localStorage["currentPage"]="login";
                 if (checkPreAuth()) {openMenu();}
+                afficheMenu();
                    });
 
     $(document).on("pageshow",  "#settings", function(event, ui) {
+                    window.localStorage["currentPage"]="settings";
                    $("#settings > #account").append(' '+window.localStorage["user_surname"]+window.localStorage["user_name"]+'.');
+                    afficheMenu();
                    });
 
     $(document).on("pageshow",  "#trombinoscope", function(event, ui) {
-                   
+                    window.localStorage["currentPage"]="trombinoscope";
+                    afficheMenu();
                    } );
 
     $(document).on("pageshow",  "#user_profil", function(event, ui) {
-
+                    window.localStorage["currentPage"]="user_profil";
+                    afficheMenu();
                    } );
 
     $(document).on("pageshow",  "#events_trombinoscope", function(event, ui) {
-                   
+                   window.localStorage["currentPage"]="events_trombinoscope";
+                    afficheMenu();
+
                    } );
 
     $(document).on("pageshow",  "#commissions_trombinoscope", function(event, ui) {
-                   
+                   window.localStorage["currentPage"]="commission_trombinoscope";
+                    afficheMenu();
+
                    } );
              
     $(document).on("pageshow", "#subscription", function(event, ui) {
+                    window.localStorage["currentPage"]="subscription";
                    $("#subscriptionForm").on("submit",login);
+                        afficheMenu();
+
                    });
     
     $(document).on("pageshow","#scan", function(event, ui){
-                    
+                    window.localStorage["currentPage"]="scan";
+                    afficheMenu();
+
     });
 
 }
 
 //fonction appelée ailleurs pour ouvrir proprement la page login
 function openLogin(){
-    $.mobile.pageContainer.pagecontainer('change', "#loginPage");   
+    window.localStorage["currentPage"]="login";
+    $.mobile.pageContainer.pagecontainer('change', "#loginPage");
+    afficheMenu();
 }
 
 //fonction appelée ailleurs pour ouvrir proprement la page menu
 function openMenu(){
+    log("dansOpenMenu");
+    window.localStorage["currentPage"]="menuPage";
+    afficheMenu();
 	$.mobile.pageContainer.pagecontainer('change',"#menuPage");
 }
+
+//fonction appelée ailleurs pour ouvrir proprement la page trombinoscope des utilisateurs
+function openUsrTrombi(){
+}
+
+//fonction appelée ailleurs pour ouvrir proprement la page trombinoscope des prochains events
+function openEvTrombi(){
+}
+
+//fonction appelée ailleurs pour ouvrir proprement la page trombi des commissions
+function openComTrombi(){
+}
+
+//fonction appelée ailleurs pour ouvrir proprement la page de détail de mon profil
+
+//fonction appelée ailleurs pour ouvrir proprement la page de détail d'un profil utilisateur
+
+//fonction  appelée ailleurs pour ouvrir proprement la page de détail d'une comission
+
+//fonction appelée ailleurs pour ouvrir proprement la page de détails d'un event
 
 //!!!!!! SECTION Requêtes AJAX
 //fonction qui se charge de reconnecter en toute situation (appelée uniquement par checkPreAuth)
@@ -213,3 +253,29 @@ function checkPreAuth() {
 }
 
 //!!!!!! SECTION Mise en forme des pages
+//Ajout du header et du menu commun à toutes les pages
+$(function () {
+        $("[data-role=header],[data-role=footer]").toolbar().enhanceWithin();
+        $("[data-role=panel]").panel().enhanceWithin();
+});
+
+$(document).on("pagecreate", function () {
+        $("[data-role=panel]").one("panelbeforeopen", function () {
+            var height = $.mobile.pageContainer.pagecontainer("getActivePage").outerHeight();
+            $(".ui-panel-wrapper").css("height", height + 1);
+        });
+});
+
+// Fonction qui sélectionne remplis le bon menu
+function afficheMenu(){
+    log("dans afficheMenu");
+    if (window.localStorage["currentPage"]=="login"){
+        $("#menu_contents").empty().append('<li><a data-theme="a" href="#" data-role="none">Mot de passe oublié</a></li>').listview().listview('refresh');
+    }else{
+         ul = $("#menu_contents");
+        ul.empty();
+        items = '<li><a data-theme="a" onclick="openUsrTrombi();" data-role="none">Trombinoscope</a></li><li><a data-theme="a" onclick="openMyProfil();" data-role="none">Mon profil</a></li><li><a data-theme="a" onclick="openEvTrombi();" data-role="none">Évènements</a></li><li><a data-theme="a" onclick="openComTrombi();" data-role="none">Commissions</a></li><li><a href="#locale" onclick="logout()" class="f-cogs">Déconnexion</a></li> ';
+        ul.append(items);
+        ul.listview().listview('refresh');
+    }
+}

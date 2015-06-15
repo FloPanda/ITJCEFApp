@@ -33,9 +33,6 @@
     <icon gap:density="hdpi" gap:platform="android" src="icons/android/icon-72-hdpi.png" />
     <icon gap:density="xhdpi" gap:platform="android" src="icons/android/icon-96-xhdpi.png" />
     <gap:plugin name="com.phonegap.plugins.barcodescanner" version="2.2.0" />
-    <gap:plugin name="org.cloudsky.cordovaplugins.zbar" />
-
-
     <content src="index.html" />
     <access origin="*" />
 </widget>

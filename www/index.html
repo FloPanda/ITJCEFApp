@@ -11,23 +11,25 @@
     </head>
 
     <body>
+
+<!-- Header commun à toutes les pages -->
+    <div data-role="header" data-position="fixed" data-theme="a">	<a href="#main_menu" data-transition="reveal" class="f-menu menu_control ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" data-form="ui-icon" data-role="button"><span></span></a>
+         <h1>JCEF</h1>
+
+    </div>
+
+
     <div data-role="page" id="startPage">
         <a id="callScanPage" href="#scanPage">aller</a>
         <a id="callLoginPage" href="#loginPage">Login</a>
         <a id="callMenuPage" href="#menuPage">Menu</a>
-    </div>
+        </div>
+    
+
 
 <!-- page de connexion si l'utilisateur n'a pas d'identifiant enregistré ou si celui-ci ne fonctionne plus -->
         <div data-role="page" id="loginPage">
             <div class= "statusBar">&nbsp;</div>
-
-                    <div data-role="header" id="mainHeader">
-                        <div class="maxWidth">
-                            <hgroup>
-                                <h1>App JCEF</h1>
-                                <p>Bienvenue sur l'App de JCEF de Shanghai !</p>
-                            </hgroup>
-                        </div>
                     <div data-role="content" id="content">
                         <article id="connexionForm" class="component">
                             <header>
@@ -67,9 +69,9 @@
                             </div>
                         </footer>
                     </div>
-                    </div>
-        <!-- popup modèle -->
-            <div data-role="popup" class="popupBasic">
+        </div>
+<!-- popup modèle -->
+        <div data-role="popup" class="popupBasic">
             	<h2></h2>
             	<p></p>       
             	<a data-inline="true" data-role="button" data-rel="back" href="#">Ok</a>        
@@ -81,149 +83,123 @@
             <a id="kobutton" data-inline="true" data-role="button" href="#">Annuler</a>
             <a id="okbutton" data-inline="true" data-role="button" href="#">Confirmer</a>
         </div>
-        
-        </div>
-    
+            
 <!-- Menu utilisateur -->
         <div data-role="page" id="menuPage">
-            <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Menu</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-                <a class="ui-btn-right  ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>     
+            <div class= "statusBar">&nbsp;</div>  
         
-           <div id='Boutons'>
+           <div role='main' id='Boutons'>
              <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openUsrTrombi();" data-role="none">Trombinoscope</button>
              <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openMyProfil();" data-role="none">Mon profil</button>
              <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEvTrombi();" data-role="none">Évènements</button>
              <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openComTrombi();" data-role="none">Commissions</button>
              <a href="#scanPage">Scanner</a>
            </div>
+        </div>
 
-                
-                
-            </div>
+<!-- Page de listing des prochains évènements affichée après le login -->
+        <div data-role="page" id="eventTrombiPage">
+            
+        </div>
 
 <!-- trombinoscope utilisateur -->
         <div data-role="page" id="users_trombinoscope">
             <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Trombinoscope</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-                <a class="ui-btn-right  ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>     
-        
-           <div id='trombiUsers'>
-             
-           </div>
-
-                
-                
-            </div>
+            <div role='main' id='trombiUsers'></div>
+        </div>
 
 <!-- pade de profil utilisateur -->
         <div data-role="page" id="user_profil">
             <div class= "statusBar">&nbsp;</div>
-
-            <div data-role="header" role="banner">
-                <a class="ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" title=" Home " data-form="ui-icon" data-role="button" role="button" onclick="return openLogin();"> Home </a>
-                <h1 class="ui-title" tabindex="0" role="heading" aria-level="1">Profil Utilisateur</h1>
-                <a class="ui-btn-right ui-btn-corner-all ui-btn ui-icon-grid ui-btn-icon-notext ui-shadow" title=" Navigation " data-form="ui-icon" data-role="button" role="link" href="#" onclick="openSettings()">  </a>
-            </div>
-                
-
-            <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEditUserProfil()" data-role="none">Editer</button>
-
-        
-            <div id='userDetails'>
-               <div>
-                <div id="user_picture">             
+            <div role="main" id="userProfilDetails">
+                <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEditUserProfil()" data-role="none">Editer</button>        
+                <div id='userDetails'>
+                   <div>
+                    <div id="user_picture">             
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_surname">
+                        Prénom : <span id="userVisuSurname"></span>
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_name">
+                        Nom :  
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_jcef_function">
+                        Fonction : 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_nation">
+                        Pays : 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_company">
+                        Entreprise : 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_subscription_date">
+                        Inscription : 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_email_jcef">
+                        Email JCEF :
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_birth">
+                        Naissance :
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_sex">
+                        Sexe : 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_skype">
+                        Skype : 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_weixin">
+                        WeChat : 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="user_qr_code_url">
+                        QRCode : 
+                        <img src="https://chart.googleapis.com/chart?cht=qr&chl='.$user_concerned->user_qr_code_url.'&chs=100x100&choe=UTF-8&chld=L|2" alt="">
+                    </div>
+                    </div>
                 </div>
-                </div>
-                <div>
-                <div id="user_surname">
-                    Prénom : <span id="userVisuSurname"></span>
-                </div>
-                </div>
-                <div>
-                <div id="user_name">
-                    Nom :  
-                </div>
-                </div>
-                <div>
-                <div id="user_jcef_function">
-                    Fonction : 
-                </div>
-                </div>
-                <div>
-                <div id="user_nation">
-                    Pays : 
-                </div>
-                </div>
-                <div>
-                <div id="user_company">
-                    Entreprise : 
-                </div>
-                </div>
-                <div>
-                <div id="user_subscription_date">
-                    Inscription : 
-                </div>
-                </div>
-                <div>
-                <div id="user_email_jcef">
-                    Email JCEF :
-                </div>
-                </div>
-                <div>
-                <div id="user_birth">
-                    Naissance :
-                </div>
-                </div>
-                <div>
-                <div id="user_sex">
-                    Sexe : 
-                </div>
-                </div>
-                <div>
-                <div id="user_skype">
-                    Skype : 
-                </div>
-                </div>
-                <div>
-                <div id="user_weixin">
-                    WeChat : 
-                </div>
-                </div>
-                <div>
-                <div id="user_qr_code_url">
-                    QRCode : 
-                    <img src="https://chart.googleapis.com/chart?cht=qr&chl='.$user_concerned->user_qr_code_url.'&chs=100x100&choe=UTF-8&chld=L|2" alt="">
-                </div>
-                </div>
-            </div> 
-            <div class="smallItem">
-                
-            </div>
-            <div class ="footer">
-                <p>Visitez notre site internet :<a href="http://dev-app.jcef-shanghai.com/Cartes/Site/View/">
-                    http://dev-app.jcef-shanghai.com</a> </p>  
             </div>
 		</div>
     
 <!-- page de lancement du scan d'un QRCode -->   
     <div data-role="page" id="scanPage">
-        <p>
-        <a id="back" href="#startPage">retour</a>
-        <button id="startScan">Start Scan</button>
-        </p>
-
-        <div id="results"></div>
+        <div role="main" id="scanLaunchingPage">
+            <a id="back" href="#startPage">retour</a>
+            <button id="startScan">Start Scan</button>
+            <div id="results"></div>
+        </div>
+    </div>
+        
+<!-- Panel menu de droite -->
+    <div data-role="panel" id="main_menu" data-position="right" data-display="overlay" data-theme="a">
+       <div class="ui-panel-inner">
+          <h3>Menu</h3>
+        </div>
+        <ul data-role="listview" id="menu_contents">
+        </ul>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Fermer le menu</a>
     </div>
 
         <script type="text/javascript" src="cordova.js"></script>
