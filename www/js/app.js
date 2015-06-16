@@ -3,7 +3,7 @@ var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
 var resultDiv;
 var clickTouch;
 var debug = true;
-var device = true;
+var device = false;
 
 
 //!!!!!! SECTION Initialisation
@@ -144,6 +144,14 @@ function openUserProfilDirect(uuid){
 
 //fonction appelée ailleurs pour ouvrir proprement la page de détails d'un event
 function openEventDetails(pk){
+    WSevent_profil(pk);
+    window.localStorage["currentPage"]="eventDetailsPage";
+	$.mobile.pageContainer.pagecontainer('change',"#event_profil");
+    res = JSON.parse(window.localStorage["selected_event_profil"]);
+    $('#eventVisuSurname').html(res.ev_name).enhanceWithin();
+    if (window.localStorage["admin"]==1){
+        $('#startscan').html("<button id='startScan' onclick='startScan()'>Start Scan</button>").enhanceWithin();
+    }
 }
 
 //fonction appelée ailleurs pour ouvrir la page de Scan des membres
@@ -168,9 +176,7 @@ function handleLogin(u,p) {
                statusCode:
                {
                200 : function (res){
-               //j'enregistre l'id, le mot de passe, le token et la date de fin
-               window.localStorage["token"]=res.token;
-               window.localStorage["expireAt"]=res.expireAt;
+               window.localStorage["admin"]=res;
                bool = true;
                },
                401 : function(){
@@ -216,8 +222,7 @@ function login(){
                window.localStorage["user_uuid"] = u;
                window.localStorage["user_password"] = p;
                //window.localStorage["user_is_admin"] = a;
-               window.localStorage["token"]=res.token;
-               window.localStorage["expireAt"]=res.expireAt;
+               window.localStorage["admin"]=res;
                openEvTrombi(); 
                },
                401 : function(){
