@@ -1,7 +1,5 @@
 <!-- Page regroupant les templates utilisés ailleurs -->
 
-
-
 <!-- template appelé par le trombinoscope des utilisateurs-->
 <script type="text/html" id="tpl-trombiUsers">          
     {{#user_list}} 
@@ -48,7 +46,7 @@
                         <li>ev_description  : {{ev_description}}</li>
                         <li>ev_picture  : {{ev_picture}}</li>
                     </ul>
-                        <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="" data-role="none">Voir l'évènement</button>
+                        <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEventDetails({{ev_pk}})" data-role="none">Voir l'évènement</button>
                 </div>
             </article>
     {{/ev_list}}
@@ -69,7 +67,6 @@
                         <li>com_description   : {{com_description}}</li>
                         <li>com_picture  : {{com_picture}}</li>
                     </ul>
-                        <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="" data-role="none">Voir l'évènement</button>
                 </div>
             </article>
     {{/com_list}}
@@ -77,7 +74,7 @@
 </script>
 
 <!-- template d'une popup -->
-<script typr="text/html" id="tpl-PopUp">
+<script type="text/html" id="tpl-PopUp">
     <div data-role="popup" id="popupLogin" class="ui-content">
 		<div data-role="header">
 			<h1>My dialog heading</h1>
@@ -89,7 +86,7 @@
 </script>
 
 <!-- template d'une modale -->
-<script typr="text/html" id="tpl-Modal">
+<script type="text/html" id="tpl-Modal">
     <div data-role="popup" id="popupLogin" class="ui-content">
 		<div data-role="header">
 			<h1>My dialog heading</h1>

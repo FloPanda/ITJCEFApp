@@ -142,9 +142,17 @@ function openUserProfilDirect(uuid){
     afficheMenu();
 }
 
-//fonction  appelée ailleurs pour ouvrir proprement la page de détail d'une comission
-
 //fonction appelée ailleurs pour ouvrir proprement la page de détails d'un event
+function openEventDetails(pk){
+}
+
+//fonction appelée ailleurs pour ouvrir la page de Scan des membres
+function openScan(){
+}
+
+//fontion appelée ailleurs de validation du scan d'un membre
+function openValidateCheck(){
+}
 
 //!!!!!! SECTION Requêtes AJAX
 //fonction qui se charge de reconnecter en toute situation (appelée uniquement par checkPreAuth)
@@ -330,6 +338,34 @@ function WSuser_profil(user_uuid){
                     //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
                     $('#userVisuSurname').html( res.user_surname ).enhanceWithin();
                     window.localStorage["selected_user_profil"] = JSON.stringify(res);
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
+//Affiche les détails d'un event 
+function WSevent_profil(event_pk){
+    var URL = host + "/Controller/WSevent_profil.php";
+    var contentElem;
+    //if(user != '') {
+        $.ajax({
+            type: 'GET',
+            url: URL+"?event_pk="+event_pk,
+            dataType: "json",
+            async: false,
+            statusCode: {
+                200: function (res) {
+                    window.localStorage["selected_event_profil"] = JSON.stringify(res);
                     },
                 404: function(){
                     self.showAlert(current, "Le serveur ne répond pas.", "erreur");
