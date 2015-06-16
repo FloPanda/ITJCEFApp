@@ -119,11 +119,28 @@ function openEvTrombi(){
 
 //fonction appelée ailleurs pour ouvrir proprement la page trombi des commissions
 function openComTrombi(){
+    WStrombinoscope_commissions();
+    window.localStorage["currentPage"]="commissionTrombiPage";
+    $.mobile.pageContainer.pagecontainer('change', "#comTrombiPage");
+    afficheMenu();
+    drawTrombiCom();
 }
 
 //fonction appelée ailleurs pour ouvrir proprement la page de détail de mon profil
+function openMyProfil(){
+    WSuser_profil(window.localStorage["user_uuid"]);
+    window.localStorage["currentPage"]="myProfilPage";
+	$.mobile.pageContainer.pagecontainer('change',"#user_profil");
+    afficheMenu();
+}
 
 //fonction appelée ailleurs pour ouvrir proprement la page de détail d'un profil utilisateur
+function openUserProfilDirect(uuid){
+    WSuser_profil(uuid);
+    window.localStorage["currentPage"]="myProfilPage";
+	$.mobile.pageContainer.pagecontainer('change',"#user_profil");
+    afficheMenu();
+}
 
 //fonction  appelée ailleurs pour ouvrir proprement la page de détail d'une comission
 
@@ -401,11 +418,12 @@ $(document).on("pagecreate", function () {
 function afficheMenu(){
     log("dans afficheMenu");
     if (window.localStorage["currentPage"]=="login"){
-        $("#menu_contents").empty().append('<li><a data-theme="a" href="#" data-role="none">Mot de passe oublié</a></li>').listview().listview('refresh');
+        $("#menu_contents").empty();
+        $("#menu_contents").append('<li><a data-theme="a" href="#" data-role="none">Mot de passe oublié</a></li>').listview().listview('refresh');
     }else{
          ul = $("#menu_contents");
         ul.empty();
-        items = '<li><a data-theme="a" onclick="openUsrTrombi();" data-role="none">Trombinoscope</a></li><li><a data-theme="a" onclick="openMyProfil();" data-role="none">Mon profil</a></li><li><a data-theme="a" onclick="openEvTrombi();" data-role="none">Évènements</a></li><li><a data-theme="a" onclick="openComTrombi();" data-role="none">Commissions</a></li><li><a href="#locale" onclick="logout()" class="f-cogs">Déconnexion</a></li> ';
+        items = '<li><a data-theme="a" onclick="openUsrTrombi();" data-role="none">Trombinoscope</a></li><li><a data-theme="a" onclick="openMyProfil();" data-role="none">Mon profil</a></li><li><a data-theme="a" onclick="openEvTrombi();" data-role="none">Évènements</a></li><li><a data-theme="a" onclick="openComTrombi();" data-role="none">Commissions</a></li><li><a href="#locale" onclick="logout()" class="f-cogs">Déconnexion</a></li>';
         ul.append(items);
         ul.listview().listview('refresh');
     }
@@ -488,5 +506,21 @@ function drawTrombiEvents() {
               var template = $(template).filter('#tpl-trombiEvents').html();
               var html = Mustache.to_html(template, users);
               $('#trombiEvents').html(html).trigger('create');
+              },'html');}
+}
+
+//Fonction chargée de dessiner le trombi des commissions
+function drawTrombiCom(){
+    log("dans trombiCom");
+        $('#trombiCommissions').html('');
+    if (window.localStorage["commissions"]!= undefined){
+        log("commissions trouvées");
+        $.get('js/template.html', function(template) {
+            log("fichier trouvé");
+              // charge le fichier templates et récupère le contenu de la
+              var users = JSON.parse(window.localStorage["commissions"]);
+              var template = $(template).filter('#tpl-trombiCom').html();
+              var html = Mustache.to_html(template, users);
+              $('#trombiCommissions').html(html).trigger('create');
               },'html');}
 }

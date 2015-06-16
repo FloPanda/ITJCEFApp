@@ -32,7 +32,7 @@
     <br/>
 </script>
    
-<!-- template appelé par le trombinoscope des utilisateurs -->
+<!-- template appelé par le trombinoscope des Events -->
     <script type="text/html" id="tpl-trombiEvents">          
     {{#ev_list}}   
             <article>
@@ -55,7 +55,26 @@
     <br/>
 </script>
 
-
+<!-- template appelé par le trombinoscope des commissions -->
+    <script type="text/html" id="tpl-trombiCom">          
+    {{#com_list}}   
+            <article>
+                <header>
+                    <h2>{{com_name}}</h2>
+                </header>
+                <div class= "contentDesc">
+                    <ul class="contentAttribute">
+                        <li>com_pk  : {{com_pk}}</li>
+                        <li>com_name   : {{com_name}}</li>
+                        <li>com_description   : {{com_description}}</li>
+                        <li>com_picture  : {{com_picture}}</li>
+                    </ul>
+                        <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="" data-role="none">Voir l'évènement</button>
+                </div>
+            </article>
+    {{/com_list}}
+    <br/>
+</script>
 
 <!-- template d'une popup -->
 <script typr="text/html" id="tpl-PopUp">
