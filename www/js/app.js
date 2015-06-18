@@ -1,5 +1,6 @@
 //déclaration des variables globales
-var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
+//var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
+var host = "http://localhost:8888/ITJCEFCarte/Site";
 var resultDiv;
 var clickTouch;
 var debug = true;
@@ -86,9 +87,13 @@ function onGlobal() {
 
 //fonction appelée ailleurs pour ouvrir proprement la page login
 function openLogin(){
+    if (checkPreAuth()) {
+        openEvTrombi();
+    } else {
     window.localStorage["currentPage"]="login";
     $.mobile.pageContainer.pagecontainer('change', "#loginPage");
     afficheMenu();
+    }
 }
 
 //fonction appelée ailleurs pour ouvrir proprement la page menu
@@ -150,12 +155,14 @@ function openEventDetails(pk){
     res = JSON.parse(window.localStorage["selected_event_profil"]);
     $('#eventVisuSurname').html(res.ev_name).enhanceWithin();
     if (window.localStorage["admin"]==1){
-        $('#startscan').html("<button id='startScan' onclick='startScan()'>Start Scan</button>").enhanceWithin();
+        $('#startscan').html("<button id='startScan' onclick='openScan()'>Commencer le pointage</button>").enhanceWithin();
     }
 }
 
 //fonction appelée ailleurs pour ouvrir la page de Scan des membres
 function openScan(){
+    window.localStorage["currentPage"]="ScanPage";
+    $.mobile.pageContainer.pagecontainer('change',"#event_profil");      
 }
 
 //fontion appelée ailleurs de validation du scan d'un membre
@@ -432,6 +439,7 @@ function checkPreAuth() {
 
 //fonction de déconnexion !TODO : savoir où je suis
 function logout() {
+    log("dans logout");
 	var current=$("#account");
     self.showModal(current, "Souhaitez-vous vraiment vous déconnecter ?", "information", function () {
         self.showAlert(current, "Déconnexion en cours", "information");

@@ -21,8 +21,8 @@
 
 
     <div data-role="page" id="startPage">
-        <a id="callScanPage" href="#scanPage">aller</a>
-        <a id="callLoginPage" href="#loginPage">Login</a>
+        <a id="callScanPage" href="#">aller</a>
+        <a id="callLoginPage" href="#" onclick="openLogin()">Login</a>
         <a id="callMenuPage" href="#menuPage">Menu</a>
         </div>
     
@@ -118,8 +118,7 @@
 <!-- Profil utilisateur -->
         <div data-role="page" id="user_profil">
             <div class= "statusBar">&nbsp;</div>
-            <div role="main" id="userProfilDetails">
-                <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openEditUserProfil()" data-role="none">Editer</button>        
+            <div role="main" id="userProfilDetails">      
                 <div id='userDetails'>
                    <div>
                     <div id="user_picture">             
