@@ -8,7 +8,7 @@
         <script src="js/jquery/jquery-1.11.1.min.js"></script>
         <script src="js/jquery/jquery.mobile-1.4.5.min.js"></script>
         <script src="js/mustache.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/JCEF-Mobile-Theme.css" />
     </head>
 
     <body>
@@ -99,6 +99,22 @@
            </div>
         </div>
 
+
+<!-- Menu utilisateur -->
+<div data-role="page" id="adminPage">
+    <div class= "statusBar">&nbsp;</div>  
+
+   <div role='main' id='Boutons'>
+     <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openAddUser();" data-role="none">Ajout Utilisateur</button>
+     <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openAddEvent();" data-role="none">Ajout Evenement</button>
+     <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openAddCom();" data-role="none">Ajout Commission</button>
+     <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openGestionDroits();" data-role="none">Gestion des Droits</button>
+     <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openUsersAttente();" data-role="none">Utilisateurs en Attente</button>
+     <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="openStatistiques();" data-role="none">Statistiques</button>
+     <a href="#scanPage">Scanner</a>
+   </div>
+</div>
+
 <!-- Page de listing des prochains évènements affichée après le login -->
         <div data-role="page" id="eventTrombiPage">
             <div role='main' id='trombiEvents'></div>
@@ -121,68 +137,79 @@
             <div role="main" id="userProfilDetails">      
                 <div id='userDetails'>
                    <div>
-                    <div id="user_picture">             
+                    <div id="user_picture">
+                        <img id="userVisuImage" style="display:block; width:150px;height:150px;" src="" alt="">             
                     </div>
                     </div>
                     <div>
-                    <div id="user_surname">
+                    <div id="user_browse_picture">
+                        <span id="userBrowsePicture"></span>
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_surname">
                         Prénom : <span id="userVisuSurname"></span>
                     </div>
                     </div>
                     <div>
-                    <div id="user_name">
-                        Nom :  
+                    <div id="div_user_name">
+                        Nom : <span id="userVisuName"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_jcef_function">
-                        Fonction : 
+                    <div id="div_user_jcef_function">
+                        Fonction : <span id="userVisuFonction"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_nation">
-                        Pays : 
+                    <div id="div_user_nation">
+                        Pays : <span id="userVisuPays"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_company">
-                        Entreprise : 
+                    <div id="div_user_company">
+                        Entreprise : <span id="userVisuEntreprise"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_subscription_date">
-                        Inscription : 
+                    <div id="div_user_subscription_date">
+                        Inscription : <span id="userVisuInscription"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_email_jcef">
-                        Email JCEF :
+                    <div id="div_user_email_jcef">
+                        Email JCEF :  <span id="userVisuEmailJCEF"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_birth">
-                        Naissance :
+                    <div id="div_user_birth">
+                        Naissance :  <span id="userVisuNaissance"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_sex">
-                        Sexe : 
+                    <div id="div_user_sex">
+                        Sexe :  <span id="userVisuSexe"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_skype">
-                        Skype : 
+                    <div id="div_user_skype">
+                        Skype : <span id="userVisuSkype"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_weixin">
-                        WeChat : 
+                    <div id="div_user_weixin">
+                        WeChat : <span id="userVisuWechat"></span> 
                     </div>
                     </div>
                     <div>
-                    <div id="user_qr_code_url">
+                    <div id="div_user_qr_code_url">
                         QRCode : 
-                        <img src="https://chart.googleapis.com/chart?cht=qr&chl='.$user_concerned->user_qr_code_url.'&chs=100x100&choe=UTF-8&chld=L|2" alt="">
+                        <img id="userVisuQRCode" src="" alt="">
+                    </div>
+                    </div>
+                    <div>
+                    <div id="userVisuAddButton"> 
+                        
                     </div>
                     </div>
                 </div>
@@ -192,12 +219,44 @@
 <!-- Event Profil -->
        <div data-role="page" id="event_profil">
            <div role="main" id="eventProfilDetails">
-               <div id="eventVisuSurname">
-                        Évènement : <span id="eventVisuSurname"></span>
-                </div>
-                <div id="startscan"></div>
+               
+                        <div id="ev_picture">
+                            <img id="eventVisuImage" style="display:block; width:150px;height:150px;" src="" alt="">             
+                        </div>
+                        <div id="ev_name">
+                            Nom : <span id="eventVisuName"></span>
+                        </div>
+                        <div id="ev_date">
+                            Date : <span id="eventVisuDate"></span>
+                        </div>
+                        <div id="ev_address">
+                            Lieu : <span id="eventVisuLieu"></span>
+                        </div>
+                        <div id="ev_description">
+                            Description : <span id="eventVisuDescription"></span>
+                        </div>
+                
+                        <div id="startscan">
+                            <button data-theme="a" data-form="ui-btn-up-a" class=" ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check" onclick="startScan()" data-role="none">Scanner</button>
+                        </div>
            </div>
        </div>
+
+<!-- Com Profil -->
+<div data-role="page" id="com_profil">
+   <div role="main" id="comProfilDetails">
+       
+            <div id="com_picture">
+                <img id="comVisuImage" style="display:block; width:150px;height:150px;" src="" alt="">             
+            </div>
+            <div id="com_name">
+                Nom : <span id="comVisuName"></span>
+            </div>
+            <div id="com_description">
+                Description : <span id="comVisuDescription"></span>
+            </div>
+    </div>
+</div>
     
 <!-- page de lancement du scan d'un QRCode -->   
     <div data-role="page" id="scanPage">
@@ -211,6 +270,8 @@
 <!-- Panel menu de droite -->
     <div data-role="panel" id="main_menu" data-position="right" data-display="overlay" data-theme="a">
         <ul data-role="listview" id="menu_contents">
+            <ul data-role="listview" id="admin_menu_contents">
+            </ul>
         </ul>
     </div>
 

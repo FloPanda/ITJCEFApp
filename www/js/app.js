@@ -1,6 +1,6 @@
 //déclaration des variables globales
 //var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
-var host = "http://localhost:8888/ITJCEFCarte/Site";
+var host = "http://localhost/ITJCEFCarte/Site";
 var resultDiv;
 var clickTouch;
 var debug = true;
@@ -139,6 +139,53 @@ function openMyProfil(){
     afficheMenu();
 }
 
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un user
+function openAddUser(){
+    $('#user_browse_picture').html("<input type='file' name='user_picture' id='user_picture'>").enhanceWithin();
+    $('#userVisuSurname').html("<input type='text' name='user_surname' id='user_surname'>").enhanceWithin();
+    $('#userVisuName').html("<input type='text' name='user_name' id='user_name'>").enhanceWithin();
+    $('#userVisuFonction').html("<input type='text' name='user_jcef_function' id='user_jcef_function'>").enhanceWithin();
+    $('#userVisuPays').html( "<input type='text' name='user_nation' id='user_nation'>" ).enhanceWithin();
+    $('#userVisuEntreprise').html( "<input type='text' name='user_company' id='user_company'>" ).enhanceWithin();
+    $('#userVisuInscription').html( "<input type='text' name='user_subscription_date' id='user_subscription_date'>" ).enhanceWithin();
+    $('#userVisuEmailJCEF').html( "<input type='text' name='user_email_jcef' id='user_email_jcef'>" ).enhanceWithin();
+    $('#userVisuNaissance').html( "<input type='text' name='user_birth' id='user_birth'>" ).enhanceWithin();
+    $('#userVisuSexe').html( "<input type='text' name='user_sex' id='user_sex'>" ).enhanceWithin();
+    $('#userVisuSkype').html( "<input type='text' name='user_skype' id='user_skype'>" ).enhanceWithin();
+    $('#userVisuWechat').html( "<input type='text' name='user_weixin' id='user_weixin'>" ).enhanceWithin();
+    $('#userVisuQRCode').attr("src","").enhanceWithin();
+    $('#userVisuAddButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSadd_user()' data-role='none'>Ajouter</button>" ).enhanceWithin();
+    //WSadd_user();
+    window.localStorage["currentPage"]="addUserPage";
+  $.mobile.pageContainer.pagecontainer('change',"#user_profil");
+    afficheMenu();
+}
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
+function openAddEvent(){
+    //WSuser_profil(window.localStorage["user_uuid"]);
+    window.localStorage["currentPage"]="addEventPage";
+  $.mobile.pageContainer.pagecontainer('change',"#add_event");
+    afficheMenu();
+}
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'une commission
+function openAddCom(){
+    //WSuser_profil(window.localStorage["user_uuid"]);
+    window.localStorage["currentPage"]="addComPage";
+  $.mobile.pageContainer.pagecontainer('change',"#add_com");
+    afficheMenu();
+}
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un user
+function openUsersAttente(){
+    //WSuser_profil(window.localStorage["user_uuid"]);
+    window.localStorage["currentPage"]="usersAttentePage";
+  $.mobile.pageContainer.pagecontainer('change',"#users_attente");
+    afficheMenu();
+}
+
 //fonction appelée ailleurs pour ouvrir proprement la page de détail d'un profil utilisateur
 function openUserProfilDirect(uuid){
     WSuser_profil(uuid);
@@ -152,11 +199,18 @@ function openEventDetails(pk){
     WSevent_profil(pk);
     window.localStorage["currentPage"]="eventDetailsPage";
 	$.mobile.pageContainer.pagecontainer('change',"#event_profil");
-    res = JSON.parse(window.localStorage["selected_event_profil"]);
-    $('#eventVisuSurname').html(res.ev_name).enhanceWithin();
     if (window.localStorage["admin"]==1){
         $('#startscan').html("<button id='startScan' onclick='openScan()'>Commencer le pointage</button>").enhanceWithin();
     }
+}
+
+//fonction appelée ailleurs pour ouvrir proprement la page de détails d'une commission
+function openComDetails(pk){
+    WScom_profil(pk);
+    window.localStorage["currentPage"]="comDetailsPage";
+  $.mobile.pageContainer.pagecontainer('change',"#com_profil");
+    
+    
 }
 
 //fonction appelée ailleurs pour ouvrir la page de Scan des membres
@@ -226,10 +280,12 @@ function login(){
                {
                200 : function(res){
                //j'enregistre l'id, le mot de passe, le token et la date de fin
+               var str =  JSON.stringify(res);
                window.localStorage["user_uuid"] = u;
                window.localStorage["user_password"] = p;
-               //window.localStorage["user_is_admin"] = a;
-               window.localStorage["admin"]=res;
+               window.localStorage["user_is_admin"] = res.user_is_admin;
+               window.localStorage["active_user"]=str;
+               
                openEvTrombi(); 
                },
                401 : function(){
@@ -348,7 +404,21 @@ function WSuser_profil(user_uuid){
             statusCode: {
                 200: function (res) {
                     //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    $('#user_browse_picture').html("").enhanceWithin();
+                    $('#userVisuImage').attr("src",host+"/"+res.user_picture).enhanceWithin();
                     $('#userVisuSurname').html( res.user_surname ).enhanceWithin();
+                    $('#userVisuName').html( res.user_name ).enhanceWithin();
+                    $('#userVisuFonction').html( res.user_jcef_function ).enhanceWithin();
+                    $('#userVisuPays').html( res.user_nation ).enhanceWithin();
+                    $('#userVisuEntreprise').html( res.user_company ).enhanceWithin();
+                    $('#userVisuInscription').html( res.user_subscription_date ).enhanceWithin();
+                    $('#userVisuEmailJCEF').html( res.user_email_jcef ).enhanceWithin();
+                    $('#userVisuNaissance').html( res.user_birth ).enhanceWithin();
+                    $('#userVisuSexe').html( res.user_sex ).enhanceWithin();
+                    $('#userVisuSkype').html( res.user_skype ).enhanceWithin();
+                    $('#userVisuWechat').html( res.user_weixin ).enhanceWithin();
+                    $('#userVisuQRCode').attr("src","https://chart.googleapis.com/chart?cht=qr&chl="+res.user_qr_code_url+"&chs=100x100&choe=UTF-8&chld=L|2").enhanceWithin();
+                    $('#userVisuAddButton').html("").enhanceWithin();
                     window.localStorage["selected_user_profil"] = JSON.stringify(res);
                     },
                 404: function(){
@@ -365,6 +435,61 @@ function WSuser_profil(user_uuid){
     return false;
 }
 
+
+
+
+
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WSadd_user(){
+var URL = host + "/Controller/WSadd_user.php";
+    var contentElem;
+    
+    
+    var user_picture = $("#user_browse_picture").val();
+    var user_surname = $("#user_surname").val();
+    var user_name = $("#user_name").val();
+    var user_picture = $("#user_picture").val();
+    var user_jcef_function = $("#user_jcef_function").val();
+    var user_company = $("#user_company").val();
+    var user_subscription_date = $("#user_subscription_date").val();
+    var user_email_jcef = $("#user_email_jcef").val();
+    var user_birth = $("#user_birth").val();
+    var user_sex = $("#user_sex").val();
+    var user_skype = $("#user_skype").val();
+    var user_weixin = $("#user_weixin").val();
+
+
+
+    //if(user != '') {
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: {user_picture:user_picture,user_surname:user_surname,user_name:user_name,user_jcef_function:user_jcef_function,user_company:user_company,user_subscription_date:user_subscription_date,user_email_jcef:user_email_jcef,user_birth:user_birth,user_sex:user_sex,user_skype:user_skype,user_weixin:user_weixin},
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    },
+                    dataType: "JSON"
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
+
+
+
+
 //Affiche les détails d'un event 
 function WSevent_profil(event_pk){
     var URL = host + "/Controller/WSevent_profil.php";
@@ -377,6 +502,11 @@ function WSevent_profil(event_pk){
             async: false,
             statusCode: {
                 200: function (res) {
+                    $('#eventVisuImage').attr("src",host+"/"+res.ev_picture).enhanceWithin();
+                    $('#eventVisuName').html(res.ev_name).enhanceWithin();
+                    $('#eventVisuLieu').html(res.ev_address).enhanceWithin();
+                    $('#eventVisuDate').html(res.ev_date).enhanceWithin();
+                    $('#eventVisuDescription').html(res.ev_description).enhanceWithin();
                     window.localStorage["selected_event_profil"] = JSON.stringify(res);
                     },
                 404: function(){
@@ -393,10 +523,50 @@ function WSevent_profil(event_pk){
     return false;
 }
 
+
+
+
+//Affiche les détails d'une commission 
+function WScom_profil(com_pk){
+    var URL = host + "/Controller/WScom_profil.php";
+    var contentElem;
+    //if(user != '') {
+        $.ajax({
+            type: 'GET',
+            url: URL+"?com_pk="+com_pk,
+            dataType: "json",
+            async: false,
+            statusCode: {
+                200: function (res) {
+                    $('#comVisuImage').attr("src",host+"/"+res.com_picture).enhanceWithin();
+                    $('#comVisuName').html(res.com_name).enhanceWithin();
+                    $('#comVisuDescription').html(res.com_description).enhanceWithin();
+                    window.localStorage["selected_com_profil"] = JSON.stringify(res);
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
+
+
+
+
 //!!!!!! SECTION Fonction métier
 // lancement du scan depuis le plugin
 function startScan() {
     log("dans startscan");
+    //event_actif = JSON.parse(window.localStorage["selected_event_profil"]);
+    //event_pk = event_actif.event_pk;
 	cordova.plugins.barcodeScanner.scan(
 		function (result) {
 			var s = "Result: " + result.text + "<br/>" +
@@ -466,16 +636,35 @@ $(document).on("pagecreate", function () {
 // Fonction qui sélectionne remplis le bon menu
 function afficheMenu(){
     log("dans afficheMenu");
+    if(window.localStorage["user_is_admin"]==1)
+        {
+            $("#menuPage").append("<button data-theme='a' data-form='ui-btn-up-a' class='ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='openAdminMenu();' data-role='none'>Panel Admin</button>");
+        }
     if (window.localStorage["currentPage"]=="login"){
         $("#menu_contents").empty();
         $("#menu_contents").append('<li><a data-theme="a" href="#" data-role="none">Mot de passe oublié</a></li>').listview().listview('refresh');
     }else{
-         ul = $("#menu_contents");
+        ul = $("#menu_contents");
         ul.empty();
+        adminItem = '<li><a data-theme="a" onclick="openAdminMenu();" data-role="none">Panel Admin</a></li>';
         items = '<li><a data-theme="a" onclick="openUsrTrombi();" data-role="none">Trombinoscope</a></li><li><a data-theme="a" onclick="openMyProfil();" data-role="none">Mon profil</a></li><li><a data-theme="a" onclick="openEvTrombi();" data-role="none">Évènements</a></li><li><a data-theme="a" onclick="openComTrombi();" data-role="none">Commissions</a></li><li><a href="#locale" onclick="logout()" class="f-cogs">Déconnexion</a></li>';
+        if(window.localStorage["user_is_admin"]==1)
+        {
+          
+          ul.append(adminItem);
+        }
         ul.append(items);
         ul.listview().listview('refresh');
     }
+}
+
+
+// Fonction qui sélectionne remplis le bon menu
+function openAdminMenu(){
+    log("dans AdminafficheMenu");
+          window.localStorage["currentPage"]="menuAdmin";
+          $.mobile.pageContainer.pagecontainer('change', "#adminPage");
+          afficheMenu();     
 }
 
 //fonction qui permet d'afficher une alerte même si le système natif n'est pas accessible
@@ -530,11 +719,15 @@ function showModal(current, message, title,confirm, cancel) {
 // TODO : rendre propre la mise en forme et choisir les éléments à afficher.
 // à faire dans le fichier template.html
 function drawTrombiUsers() {
+  log("dans trombiUsr");
     $('#trombiUsers').html('');
     if (window.localStorage["users"]!= undefined){
+      log("users trouvés");
         $.get('js/template.html', function(template) {
               // charge le fichier templates et récupère le contenu de la
+              log("fichier trouvé");
               var users = JSON.parse(window.localStorage["users"]);
+              //log(users[1].user_name);
               var template = $(template).filter('#tpl-trombiUsers').html();
               var html = Mustache.to_html(template, users);
               $('#trombiUsers').html(html).trigger('create');
@@ -551,9 +744,9 @@ function drawTrombiEvents() {
         $.get('js/template.html', function(template) {
             log("fichier trouvé");
               // charge le fichier templates et récupère le contenu de la
-              var users = JSON.parse(window.localStorage["events"]);
+              var events = JSON.parse(window.localStorage["events"]);
               var template = $(template).filter('#tpl-trombiEvents').html();
-              var html = Mustache.to_html(template, users);
+              var html = Mustache.to_html(template, events);
               $('#trombiEvents').html(html).trigger('create');
               },'html');}
 }
@@ -567,9 +760,9 @@ function drawTrombiCom(){
         $.get('js/template.html', function(template) {
             log("fichier trouvé");
               // charge le fichier templates et récupère le contenu de la
-              var users = JSON.parse(window.localStorage["commissions"]);
+              var coms = JSON.parse(window.localStorage["commissions"]);
               var template = $(template).filter('#tpl-trombiCom').html();
-              var html = Mustache.to_html(template, users);
+              var html = Mustache.to_html(template, coms);
               $('#trombiCommissions').html(html).trigger('create');
               },'html');}
 }

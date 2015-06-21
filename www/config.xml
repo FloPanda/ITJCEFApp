@@ -6,10 +6,10 @@
     xmlns:gap="http://phonegap.com/ns/1.0">
     <name>JCEF Shanghai</name>
     <description>
-        Application officielle de la JCEF. Participez aux évènements
+        Application officielle de la JCEF. Participez aux évènements!
     </description>
     <author email="contact@jcef-shanghai.com" href="http://www.jcef-shanghai.com">
-        JCEF Team
+        L'équipe de la JCEF
     </author>
     <gap:platform name="ios" />
     <gap:platform name="android" />
