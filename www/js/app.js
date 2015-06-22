@@ -148,12 +148,22 @@ function openAddUser(){
     $('#userVisuFonction').html("<input type='text' name='user_jcef_function' id='user_jcef_function'>").enhanceWithin();
     $('#userVisuPays').html( "<input type='text' name='user_nation' id='user_nation'>" ).enhanceWithin();
     $('#userVisuEntreprise').html( "<input type='text' name='user_company' id='user_company'>" ).enhanceWithin();
+    $('#userVisuTitreEntreprise').html( "<input type='text' name='user_company_title' id='user_company_title'>" ).enhanceWithin();
     $('#userVisuInscription').html( "<input type='text' name='user_subscription_date' id='user_subscription_date'>" ).enhanceWithin();
     $('#userVisuEmailJCEF').html( "<input type='text' name='user_email_jcef' id='user_email_jcef'>" ).enhanceWithin();
     $('#userVisuNaissance').html( "<input type='text' name='user_birth' id='user_birth'>" ).enhanceWithin();
     $('#userVisuSexe').html( "<input type='text' name='user_sex' id='user_sex'>" ).enhanceWithin();
     $('#userVisuSkype').html( "<input type='text' name='user_skype' id='user_skype'>" ).enhanceWithin();
     $('#userVisuWechat').html( "<input type='text' name='user_weixin' id='user_weixin'>" ).enhanceWithin();
+    $('#userVisuTelMobile').html( "<input type='text' name='user_cell_phone' id='user_cell_phone'>" ).enhanceWithin();
+    $('#userVisuTelFixe').html( "<input type='text' name='user_land_phone' id='user_land_phone'>" ).enhanceWithin();
+    $('#userVisuEmailEntrep').html( "<input type='text' name='user_email_company' id='user_email_company'>" ).enhanceWithin();
+    $('#userVisuEmailPerso').html( "<input type='text' name='user_email_perso' id='user_email_perso'>" ).enhanceWithin();
+    $('#userVisuAdresse').html( "<input type='text' name='user_address' id='user_address'>" ).enhanceWithin();
+    $('#userVisuCommentaire').html( "<input type='text' name='user_comment' id='user_comment'>" ).enhanceWithin();
+    $('#userVisuTypeAdhesion').html( "<input type='text' name='user_member_type' id='user_member_type'>" ).enhanceWithin();
+    $('#userVisuDerniereCotisation').html( "<input type='text' name='user_renew_date' id='user_renew_date'>" ).enhanceWithin();
+    $('#userVisuDernierMontant').html( "<input type='text' name='user_last_amount' id='user_last_amount'>" ).enhanceWithin();
     $('#userVisuQRCode').attr("src","").enhanceWithin();
     $('#userVisuAddButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSadd_user()' data-role='none'>Ajouter</button>" ).enhanceWithin();
     //WSadd_user();
@@ -162,21 +172,114 @@ function openAddUser(){
     afficheMenu();
 }
 
-//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
-function openAddEvent(){
-    //WSuser_profil(window.localStorage["user_uuid"]);
-    window.localStorage["currentPage"]="addEventPage";
-  $.mobile.pageContainer.pagecontainer('change',"#add_event");
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un user
+function openEditUser(){
+    usr = JSON.parse(window.localStorage["selected_user_profil"]);
+    $('#user_browse_picture').html("<input type='file' name='user_picture' id='user_picture'>").enhanceWithin();
+    $('#userVisuSurname').html("<input type='text' name='user_surname' id='user_surname' value='"+usr.user_surname+"'>").enhanceWithin();
+    $('#userVisuName').html("<input type='text' name='user_name' id='user_name' value='"+usr.user_name+"'>").enhanceWithin();
+    $('#userVisuFonction').html("<input type='text' name='user_jcef_function' id='user_jcef_function' value='"+usr.user_jcef_function+"'>").enhanceWithin();
+    $('#userVisuPays').html( "<input type='text' name='user_nation' id='user_nation' value='"+usr.user_nation+"'>" ).enhanceWithin();
+    $('#userVisuEntreprise').html( "<input type='text' name='user_company' id='user_company' value='"+usr.user_company+"'>" ).enhanceWithin();
+    $('#userVisuTitreEntreprise').html( "<input type='text' name='user_company_title' id='user_company_title' value='"+usr.user_company_title+"'>" ).enhanceWithin();
+    $('#userVisuInscription').html( "<input type='text' name='user_subscription_date' id='user_subscription_date' value='"+usr.user_subscription_date+"'>" ).enhanceWithin();
+    $('#userVisuEmailJCEF').html( "<input type='text' name='user_email_jcef' id='user_email_jcef' value='"+usr.user_email_jcef+"'>" ).enhanceWithin();
+    $('#userVisuNaissance').html( "<input type='text' name='user_birth' id='user_birth' value='"+usr.user_birth+"'>" ).enhanceWithin();
+    $('#userVisuSexe').html( "<input type='text' name='user_sex' id='user_sex' value='"+usr.user_sex+"'>" ).enhanceWithin();
+    $('#userVisuSkype').html( "<input type='text' name='user_skype' id='user_skype' value='"+usr.user_skype+"'>" ).enhanceWithin();
+    $('#userVisuWechat').html( "<input type='text' name='user_weixin' id='user_weixin' value='"+usr.user_weixin+"'>" ).enhanceWithin();
+    $('#userVisuTelMobile').html( "<input type='text' name='user_cell_phone' id='user_cell_phone' value='"+usr.user_cell_phone+"'>" ).enhanceWithin();
+    $('#userVisuTelFixe').html( "<input type='text' name='user_land_phone' id='user_land_phone' value='"+usr.user_land_phone+"'>" ).enhanceWithin();
+    $('#userVisuEmailEntrep').html( "<input type='text' name='user_email_company' id='user_email_company' value='"+usr.user_email_company+"'>" ).enhanceWithin();
+    $('#userVisuEmailPerso').html( "<input type='text' name='user_email_perso' id='user_email_perso' value='"+usr.user_email_perso+"'>" ).enhanceWithin();
+    $('#userVisuAdresse').html( "<input type='text' name='user_address' id='user_address' value='"+usr.user_address+"'>" ).enhanceWithin();
+    $('#userVisuCommentaire').html( "<input type='text' name='user_comment' id='user_comment' value='"+usr.user_comment+"'>" ).enhanceWithin();
+    $('#userVisuTypeAdhesion').html( "<input type='text' name='user_member_type' id='user_member_type' value='"+usr.user_member_type+"'>" ).enhanceWithin();
+    $('#userVisuDerniereCotisation').html( "<input type='text' name='user_renew_date' id='user_renew_date' value='"+usr.user_renew_date+"'>" ).enhanceWithin();
+    $('#userVisuDernierMontant').html( "<input type='text' name='user_last_amount' id='user_last_amount' value='"+usr.user_last_amount+"'>" ).enhanceWithin();
+    $('#userVisuQRCode').attr("src","").enhanceWithin();
+    $('#userVisuAddButton').html("" ).enhanceWithin();
+    $('#userVisuEditButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSuser_update()' data-role='none'>Valider</button>" ).enhanceWithin();
+
+    //WSadd_user();
+    window.localStorage["currentPage"]="addUserPage";
+  $.mobile.pageContainer.pagecontainer('change',"#user_profil");
     afficheMenu();
 }
 
-//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'une commission
-function openAddCom(){
-    //WSuser_profil(window.localStorage["user_uuid"]);
-    window.localStorage["currentPage"]="addComPage";
-  $.mobile.pageContainer.pagecontainer('change',"#add_com");
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
+function openAddEvent(){
+    $('#event_browse_picture').html("<input type='file' name='ev_picture' id='ev_picture'>").enhanceWithin();
+    $('#eventVisuName').html("<input type='text' name='ev_name' id='ev_name'>").enhanceWithin();
+    $('#eventVisuLieu').html("<input type='text' name='ev_address' id='ev_address'>").enhanceWithin();
+    $('#eventVisuDate').html( "<input type='text' name='ev_date' id='ev_date'>" ).enhanceWithin();
+    $('#eventVisuDescription').html( "<input type='text' name='ev_description' id='ev_description'>" ).enhanceWithin();
+    $('#eventVisuParticipantsMax').html( "<input type='text' name='ev_max_participants' id='ev_max_participants'>" ).enhanceWithin();
+    $('#eventVisuParticipants').html( "<input type='text' name='ev_participants' id='ev_participants'>" ).enhanceWithin();
+    $('#eventVisuPrix').html( "<input type='text' name='ev_price' id='ev_price'>" ).enhanceWithin();
+    $('#eventVisuNbInscrits').html( "<input type='text' name='ev_nb_subscribed' id='ev_nb_subscribed'>" ).enhanceWithin();
+    $('#eventVisuResponsable').html( "<input type='text' name='ev_charged_member' id='ev_charged_member'>" ).enhanceWithin();
+    $('#eventVisuLienCom').html( "<input type='text' name='ev_com_linked' id='ev_com_linked'>" ).enhanceWithin();
+    $('#eventVisuListeParticipants').html("").enhanceWithin();
+    $('#eventVisuAddButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSadd_event()' data-role='none'>Ajouter</button>" ).enhanceWithin();
+    window.localStorage["currentPage"]="addEventPage";
+  $.mobile.pageContainer.pagecontainer('change',"#event_profil");
     afficheMenu();
 }
+
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
+function openEditEvent(){
+    ev = JSON.parse(window.localStorage["selected_event_profil"]);
+    $('#event_browse_picture').html("<input type='file' name='ev_picture' id='ev_picture' value='"+ev.ev_picture+"'>").enhanceWithin();
+    $('#eventVisuName').html("<input type='text' name='ev_name' id='ev_name' value='"+ev.ev_name+"'>").enhanceWithin();
+    $('#eventVisuLieu').html("<input type='text' name='ev_address' id='ev_address' value='"+ev.ev_address+"'>").enhanceWithin();
+    $('#eventVisuDate').html( "<input type='text' name='ev_date' id='ev_date' value='"+ev.ev_date+"'>" ).enhanceWithin();
+    $('#eventVisuDescription').html( "<input type='text' name='ev_description' id='ev_description' value='"+ev.ev_description+"'>" ).enhanceWithin();
+    $('#eventVisuParticipantsMax').html( "<input type='text' name='ev_max_participants' id='ev_max_participants' value='"+ev.ev_max_participants+"'>" ).enhanceWithin();
+    $('#eventVisuParticipants').html( "<input type='text' name='ev_participants' id='ev_participants' value='"+ev.ev_participants+"'>" ).enhanceWithin();
+    $('#eventVisuPrix').html( "<input type='text' name='ev_price' id='ev_price' value='"+ev.ev_price+"'>" ).enhanceWithin();
+    $('#eventVisuNbInscrits').html( "<input type='text' name='ev_nb_subscribed' id='ev_nb_subscribed' value='"+ev.ev_nb_subscribed+"'>" ).enhanceWithin();
+    $('#eventVisuResponsable').html( "<input type='text' name='ev_charged_member' id='ev_charged_member' value='"+ev.ev_charged_member+"'>" ).enhanceWithin();
+    $('#eventVisuLienCom').html( "<input type='text' name='ev_com_linked' id='ev_com_linked' value='"+ev.ev_com_linked+"'>" ).enhanceWithin();
+    $('#eventVisuListeParticipants').html("").enhanceWithin();
+    $('#eventVisuAddButton').html("" ).enhanceWithin();
+    $('#eventVisuEditButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSevent_update()' data-role='none'>Valider</button>" ).enhanceWithin();
+
+    window.localStorage["currentPage"]="editEventPage";
+  $.mobile.pageContainer.pagecontainer('change',"#event_profil");
+    afficheMenu();
+}
+
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
+function openAddCom(){
+    $('#com_browse_picture').html("<input type='file' name='com_picture' id='com_picture'>").enhanceWithin();
+    $('#comVisuName').html("<input type='text' name='com_name' id='com_name'>").enhanceWithin();
+    $('#comVisuDescription').html( "<input type='text' name='com_description' id='com_description'>" ).enhanceWithin();
+    $('#comVisuAddButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSadd_commission()' data-role='none'>Ajouter</button>" ).enhanceWithin();
+    window.localStorage["currentPage"]="addComPage";
+  $.mobile.pageContainer.pagecontainer('change',"#commission_profil");
+    afficheMenu();
+}
+
+
+//fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
+function openEditCom(){
+    com = JSON.parse(window.localStorage["selected_com_profil"]);
+    $('#com_browse_picture').html("<input type='file' name='com_picture' id='com_picture' value='"+com.com_picture+"'>").enhanceWithin();
+    $('#comVisuName').html("<input type='text' name='com_name' id='com_name' value='"+com.com_name+"'>").enhanceWithin();
+    $('#comVisuDescription').html( "<input type='text' name='com_description' id='com_description' value='"+com.com_description+"'>" ).enhanceWithin();
+    $('#comVisuAddButton').html("" ).enhanceWithin();
+    $('#comVisuEditButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WScommission_update()' data-role='none'>Valider</button>" ).enhanceWithin();
+
+    window.localStorage["currentPage"]="editComPage";
+  $.mobile.pageContainer.pagecontainer('change',"#commission_profil");
+    afficheMenu();
+}
+
 
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un user
 function openUsersAttente(){
@@ -403,6 +506,7 @@ function WSuser_profil(user_uuid){
             async: false,
             statusCode: {
                 200: function (res) {
+                    window.localStorage["selected_user_profil"] = JSON.stringify(res);
                     //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
                     $('#user_browse_picture').html("").enhanceWithin();
                     $('#userVisuImage').attr("src",host+"/"+res.user_picture).enhanceWithin();
@@ -411,15 +515,31 @@ function WSuser_profil(user_uuid){
                     $('#userVisuFonction').html( res.user_jcef_function ).enhanceWithin();
                     $('#userVisuPays').html( res.user_nation ).enhanceWithin();
                     $('#userVisuEntreprise').html( res.user_company ).enhanceWithin();
+                    $('#userVisuTitreEntreprise').html( res.user_company_title ).enhanceWithin();
                     $('#userVisuInscription').html( res.user_subscription_date ).enhanceWithin();
                     $('#userVisuEmailJCEF').html( res.user_email_jcef ).enhanceWithin();
                     $('#userVisuNaissance').html( res.user_birth ).enhanceWithin();
                     $('#userVisuSexe').html( res.user_sex ).enhanceWithin();
                     $('#userVisuSkype').html( res.user_skype ).enhanceWithin();
                     $('#userVisuWechat').html( res.user_weixin ).enhanceWithin();
+                    $('#userVisuTelMobile').html( res.user_cell_phone ).enhanceWithin();
+                    $('#userVisuTelFixe').html( res.user_land_phone ).enhanceWithin();
+                    $('#userVisuEmailEntrep').html( res.user_email_company ).enhanceWithin();
+                    $('#userVisuEmailPerso').html( res.user_email_perso ).enhanceWithin();
+                    $('#userVisuAdresse').html( res.user_address ).enhanceWithin();
+                    $('#userVisuCommentaire').html( res.user_comment ).enhanceWithin();
+                    $('#userVisuTypeAdhesion').html( res.user_weixin ).enhanceWithin();
+                    $('#userVisuDerniereCotisation').html( res.user_weixin ).enhanceWithin();
+                    $('#userVisuDernierMontant').html( res.user_weixin ).enhanceWithin();
                     $('#userVisuQRCode').attr("src","https://chart.googleapis.com/chart?cht=qr&chl="+res.user_qr_code_url+"&chs=100x100&choe=UTF-8&chld=L|2").enhanceWithin();
                     $('#userVisuAddButton').html("").enhanceWithin();
-                    window.localStorage["selected_user_profil"] = JSON.stringify(res);
+                    selUsr = res;
+                    actUsr = JSON.parse(window.localStorage["active_user"]);
+                    if(selUsr.user_uuid==actUsr.user_uuid || actUsr.user_is_admin==1)
+                    {
+                      $('#userVisuEditButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='openEditUser()' data-role='none'>Editer</button>" ).enhanceWithin();
+                    }
+                    
                     },
                 404: function(){
                     self.showAlert(current, "Le serveur ne répond pas.", "erreur");
@@ -445,12 +565,13 @@ var URL = host + "/Controller/WSadd_user.php";
     var contentElem;
     
     
-    var user_picture = $("#user_browse_picture").val();
+    var user_browse_picture = $("#user_browse_picture").val();
     var user_surname = $("#user_surname").val();
     var user_name = $("#user_name").val();
     var user_picture = $("#user_picture").val();
     var user_jcef_function = $("#user_jcef_function").val();
     var user_company = $("#user_company").val();
+    var user_company_title = $("#user_company").val();
     var user_subscription_date = $("#user_subscription_date").val();
     var user_email_jcef = $("#user_email_jcef").val();
     var user_birth = $("#user_birth").val();
@@ -464,7 +585,7 @@ var URL = host + "/Controller/WSadd_user.php";
         $.ajax({
             type: 'POST',
             url: URL,
-            data: {user_picture:user_picture,user_surname:user_surname,user_name:user_name,user_jcef_function:user_jcef_function,user_company:user_company,user_subscription_date:user_subscription_date,user_email_jcef:user_email_jcef,user_birth:user_birth,user_sex:user_sex,user_skype:user_skype,user_weixin:user_weixin},
+            data: {user_browse_picture:user_picture,user_surname:user_surname,user_name:user_name,user_jcef_function:user_jcef_function,user_company:user_company,user_subscription_date:user_subscription_date,user_email_jcef:user_email_jcef,user_birth:user_birth,user_sex:user_sex,user_skype:user_skype,user_weixin:user_weixin},
             async: false,
             statusCode: {
                 200: function (res) {    
@@ -490,6 +611,73 @@ var URL = host + "/Controller/WSadd_user.php";
 
 
 
+
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WSuser_update(){
+var URL = host + "/Controller/WSuser_update.php";
+    var contentElem;
+    
+    var user_uuid = (JSON.parse(window.localStorage["selected_user_profil"])).user_uuid;
+    var user_picture = $("#user_browse_picture").val();
+    var user_surname = $("#user_surname").val();
+    var user_name = $("#user_name").val();
+    var user_picture = $("#user_picture").val();
+    var user_jcef_function = $("#user_jcef_function").val();
+    var user_company = $("#user_company").val();
+    var user_company_title = $("#user_company_title").val();
+    var user_subscription_date = $("#user_subscription_date").val();
+    var user_email_jcef = $("#user_email_jcef").val();
+    var user_birth = $("#user_birth").val();
+    var user_sex = $("#user_sex").val();
+    var user_skype = $("#user_skype").val();
+    var user_weixin = $("#user_weixin").val();
+    var user_cell_phone = $('#userVisuTelMobile').val();
+    var user_land_phone = $('#userVisuTelFixe').val();
+    var user_email_company = $('#userVisuEmailEntrep').val();
+    var user_email_perso = $('#userVisuEmailPerso').val();
+    var user_address = $('#userVisuAdresse').val();
+    var user_comment = $('#userVisuCommentaire').val();
+    var user_member_type = $('#userVisuTypeAdhesion').val();
+    var user_renew_date = $('#userVisuDerniereCotisation').val();
+    var user_last_amount = $('#userVisuDernierMontant').val();
+    
+
+    //if(user != '') {
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: {user_uuid:user_uuid,user_picture:user_picture,user_surname:user_surname,user_name:user_name,user_jcef_function:user_jcef_function,
+              user_company:user_company,user_company_title:user_company_title,user_subscription_date:user_subscription_date,user_email_jcef:user_email_jcef,
+              user_birth:user_birth,user_sex:user_sex,user_skype:user_skype,user_weixin:user_weixin,user_cell_phone:user_cell_phone,
+              user_land_phone:user_land_phone,user_email_company:user_email_company,user_email_perso:user_email_perso,user_address:user_address,
+              user_comment:user_comment,user_member_type:user_member_type,user_renew_date:user_renew_date,user_last_amount:user_last_amount},
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    },
+                    dataType: "JSON"
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
+
+
+
+
+
+
 //Affiche les détails d'un event 
 function WSevent_profil(event_pk){
     var URL = host + "/Controller/WSevent_profil.php";
@@ -506,7 +694,14 @@ function WSevent_profil(event_pk){
                     $('#eventVisuName').html(res.ev_name).enhanceWithin();
                     $('#eventVisuLieu').html(res.ev_address).enhanceWithin();
                     $('#eventVisuDate').html(res.ev_date).enhanceWithin();
-                    $('#eventVisuDescription').html(res.ev_description).enhanceWithin();
+                    $('#eventVisuParticipantsMax').html(res.ev_max_participants).enhanceWithin();
+                    $('#eventVisuParticipants').html(res.ev_participants).enhanceWithin();
+                    $('#eventVisuPrix').html(res.ev_price).enhanceWithin();
+                    $('#eventVisuNbInscrits').html(res.ev_nb_subscribed).enhanceWithin();
+                    $('#eventVisuResponsable').html(res.ev_charged_member).enhanceWithin();
+                    $('#eventVisuLienCom').html(res.ev_com_linked).enhanceWithin();
+                    //$('#eventVisuListeParticipants').html(res.).enhanceWithin();
+                    
                     window.localStorage["selected_event_profil"] = JSON.stringify(res);
                     },
                 404: function(){
@@ -522,6 +717,105 @@ function WSevent_profil(event_pk){
     //}
     return false;
 }
+
+
+
+
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WSadd_event(){
+var URL = host + "/Controller/WSadd_event.php";
+    var contentElem;
+    
+    
+    var ev_browse_picture = $("#ev_browse_picture").val();
+    var ev_name = $("#ev_name").val();
+    var ev_picture = $("#ev_picture").val();
+    var ev_date = $("#ev_date").val();
+    var ev_address = $("#ev_address").val();
+    var ev_price = $("#ev_price").val();
+    var ev_participants = $("#ev_participants").val();
+    var ev_max_participants = $("#ev_max_participants").val();
+    var ev_charged_member = $("#ev_charged_member").val();
+    var ev_com_linked = $("#ev_com_linked").val();
+    
+
+
+
+    //if(user != '') {
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: {ev_browse_picture:ev_picture,ev_name:ev_name,ev_date:ev_date,ev_address:ev_address,ev_price:ev_price,ev_participants:ev_participants,ev_max_participants:ev_max_participants,ev_charged_member:ev_charged_member,ev_com_linked:ev_com_linked},
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    },
+                    dataType: "JSON"
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
+
+
+
+
+
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WSevent_update(){
+var URL = host + "/Controller/WSuser_update.php";
+    var contentElem;
+    
+    var ev_pk = (JSON.parse(window.localStorage["selected_event_profil"])).ev_pk;
+    var ev_browse_picture = $("#ev_browse_picture").val();
+    var ev_name = $("#ev_name").val();
+    var ev_picture = $("#ev_picture").val();
+    var ev_date = $("#ev_date").val();
+    var ev_address = $("#ev_address").val();
+    var ev_price = $("#ev_price").val();
+    var ev_participants = $("#ev_participants").val();
+    var ev_max_participants = $("#ev_max_participants").val();
+    var ev_charged_member = $("#ev_charged_member").val();
+
+
+
+    //if(user != '') {
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: {ev_pk:ev_pk,ev_browse_picture:ev_picture,ev_name:ev_name,ev_date:ev_date,ev_address:ev_address,ev_price:ev_price,ev_participants:ev_participants,ev_max_participants:ev_max_participants,ev_charged_member:ev_charged_member},
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    },
+                    dataType: "JSON"
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
 
 
 
@@ -557,6 +851,91 @@ function WScom_profil(com_pk){
     return false;
 }
 
+
+
+
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WSadd_commission(){
+var URL = host + "/Controller/WSadd_commission.php";
+    var contentElem;
+    
+    
+    var com_browse_picture = $("#com_browse_picture").val();
+    var com_name = $("#com_name").val();
+    var com_picture = $("#com_picture").val();
+    var com_description = $("#com_description").val();
+
+
+    //if(user != '') {
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: {com_browse_picture:com_picture,com_name:com_name,com_description:com_description},
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    },
+                    dataType: "JSON"
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
+
+
+
+
+
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WScommission_update(){
+var URL = host + "/Controller/WScommission_update.php";
+    var contentElem;
+    
+    var com_pk = (JSON.parse(window.localStorage["selected_com_profil"])).com_pk;
+    var com_browse_picture = $("#com_browse_picture").val();
+    var com_name = $("#com_name").val();
+    var com_picture = $("#com_picture").val();
+    var com_description = $("#com_description").val();
+    
+
+
+
+    //if(user != '') {
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            data: {com_pk:com_pk,com_browse_picture:com_picture,com_name:com_name,com_description:com_description},
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    },
+                    dataType: "JSON"
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
 
 
 

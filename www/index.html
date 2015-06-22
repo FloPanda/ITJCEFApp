@@ -172,6 +172,11 @@
                     </div>
                     </div>
                     <div>
+                    <div id="div_user_company_title">
+                        Titre dans l'Entreprise : <span id="userVisuTitreEntreprise"></span> 
+                    </div>
+                    </div>
+                    <div>
                     <div id="div_user_subscription_date">
                         Inscription : <span id="userVisuInscription"></span> 
                     </div>
@@ -202,14 +207,60 @@
                     </div>
                     </div>
                     <div>
+                    <div id="div_user_cell_phone">
+                        Tel Mobile : <span id="userVisuTelMobile"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_land_phone">
+                        Tel Fixe : <span id="userVisuTelFixe"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_email_company">
+                        Email Entreprise : <span id="userVisuEmailEntrep"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_email_perso">
+                        Email Perso : <span id="userVisuEmailPerso"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_address">
+                        Adresse : <span id="userVisuAdresse"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_comment">
+                        Commentaires : <span id="userVisuCommentaire"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_type_adhesion">
+                        Type d'adhésion : <span id="userVisuTypeAdhesion"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_derniere_cotisation">
+                        Derniere cotisation : <span id="userVisuDerniereCotisation"></span> 
+                    </div>
+                    </div>
+                    <div>
+                    <div id="div_user_dernier_montant">
+                        Dernier montant : <span id="userVisuDernierMontant"></span> 
+                    </div>
+                    </div>
+                    <div>
                     <div id="div_user_qr_code_url">
                         QRCode : 
                         <img id="userVisuQRCode" src="" alt="">
                     </div>
                     </div>
                     <div>
-                    <div id="userVisuAddButton"> 
-                        
+                    <div id="userVisuAddButton">                        
+                    </div>
+                    <div id="userVisuEditButton">                        
                     </div>
                     </div>
                 </div>
@@ -220,20 +271,48 @@
        <div data-role="page" id="event_profil">
            <div role="main" id="eventProfilDetails">
                
-                        <div id="ev_picture">
+                        <div id="div_ev_picture">
                             <img id="eventVisuImage" style="display:block; width:150px;height:150px;" src="" alt="">             
                         </div>
-                        <div id="ev_name">
+                        <div id="div_ev_name">
                             Nom : <span id="eventVisuName"></span>
                         </div>
-                        <div id="ev_date">
+                        <div id="div_ev_date">
                             Date : <span id="eventVisuDate"></span>
                         </div>
-                        <div id="ev_address">
+                        <div id="div_ev_address">
                             Lieu : <span id="eventVisuLieu"></span>
                         </div>
-                        <div id="ev_description">
+                        <div id="div_ev_description">
                             Description : <span id="eventVisuDescription"></span>
+                        </div>
+                        <div id="ev_participants">
+                            Participants : <span id="eventVisuParticipants"></span>
+                        </div>
+                        <div id="ev_max_participants">
+                            Max Participants : <span id="eventVisuMaxParticipants"></span>
+                        </div>
+                        <div id="ev_price">
+                            Prix : <span id="eventVisuPrix"></span>
+                        </div>
+                        <div id="ev_nb_subscribed">
+                            Nombre Inscrits : <span id="eventVisuNbInscrits"></span>
+                        </div>
+                        <div id="ev_charged_member">
+                            Responsable : <span id="eventVisuResponsable"></span>
+                        </div>
+                        <div id="ev_com_linked">
+                            Lien Commission : <span id="eventVisuLienCom"></span>
+                        </div>
+                        <div id="ev_liste_participants">
+                            Liste Participants : <span id="eventVisuListeParticipants"></span>
+                        </div>
+
+                        <div>
+                        <div id="eventVisuAddButton">                        
+                        </div>
+                        <div id="eventVisuEditButton">                        
+                        </div>
                         </div>
                 
                         <div id="startscan">
@@ -243,7 +322,7 @@
        </div>
 
 <!-- Com Profil -->
-<div data-role="page" id="com_profil">
+<div data-role="page" id="commission_profil">
    <div role="main" id="comProfilDetails">
        
             <div id="com_picture">
@@ -254,6 +333,12 @@
             </div>
             <div id="com_description">
                 Description : <span id="comVisuDescription"></span>
+            </div>
+            <div>
+            <div id="comVisuAddButton">                        
+            </div>
+            <div id="comVisuEditButton">                        
+            </div>
             </div>
     </div>
 </div>
