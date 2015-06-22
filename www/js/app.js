@@ -140,6 +140,15 @@ function openMyProfil(){
 }
 
 
+//fonction appelée ailleurs pour ouvrir proprement la page de stats
+function openStatistiques(){
+    WSstats();
+    window.localStorage["currentPage"]="statsPage";
+  $.mobile.pageContainer.pagecontainer('change',"#statistiques");
+    afficheMenu();
+}
+
+
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un user
 function openAddUser(){
     $('#user_browse_picture').html("<input type='file' name='user_picture' id='user_picture'>").enhanceWithin();
@@ -936,6 +945,40 @@ var URL = host + "/Controller/WScommission_update.php";
     //}
     return false;
 }
+
+
+
+
+
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WSstats(){
+var URL = host + "/Controller/WSstats.php";
+    var contentElem;
+    
+        $.ajax({
+            type: 'POST',
+            dataType: "html",
+            url: URL,
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    $('#div_stats_membres').html(res).enhanceWithin();
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+              
+            });
+    
+    return false;
+}
+
+
 
 
 
