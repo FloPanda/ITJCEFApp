@@ -117,11 +117,13 @@
 
 <!-- Page de listing des prochains évènements affichée après le login -->
         <div data-role="page" id="eventTrombiPage">
+            <div class= "statusBar">&nbsp;</div>
             <div role='main' id='trombiEvents'></div>
         </div>
 
 <!-- Page de listing des commissions -->
         <div data-role="page" id="comTrombiPage">
+            <div class= "statusBar">&nbsp;</div>
             <div role='main' id='trombiCommissions'></div>
         </div>
 
@@ -142,8 +144,8 @@
                     </div>
                     </div>
                     <div>
-                    <div id="user_browse_picture">
-                        <span id="userBrowsePicture"></span>
+                    <div id="div_user_browse_picture">
+                        
                     </div>
                     </div>
                     <div>
@@ -274,6 +276,9 @@
                         <div id="div_ev_picture">
                             <img id="eventVisuImage" style="display:block; width:150px;height:150px;" src="" alt="">             
                         </div>
+                        <div id="div_ev_browse_picture">
+                             
+                        </div>
                         <div id="div_ev_name">
                             Nom : <span id="eventVisuName"></span>
                         </div>
@@ -328,6 +333,9 @@
             <div id="div_com_picture">
                 <img id="comVisuImage" style="display:block; width:150px;height:150px;" src="" alt="">             
             </div>
+            <div id="div_com_browse_picture">
+                             
+            </div>
             <div id="div_com_name">
                 Nom : <span id="comVisuName"></span>
             </div>
@@ -361,6 +369,31 @@
             
             <div>
             </div>
+    </div>
+</div>
+
+
+
+<!-- Gestion des droits -->
+<div data-role="page" id="gestion_droits">
+   <div role="main" id="droitsDetails">
+       
+            <div id="div_tab_droits">
+                             
+            </div>
+            
+    </div>
+</div>
+
+
+<!-- Utilisateurs en attente -->
+<div data-role="page" id="users_attente">
+   <div role="main" id="usersAttenteDetails">
+       
+            <div id="div_tab_users_attente">
+                             
+            </div>
+            
     </div>
 </div>
 

@@ -125,7 +125,7 @@ function openEvTrombi(){
 //fonction appelée ailleurs pour ouvrir proprement la page trombi des commissions
 function openComTrombi(){
     WStrombinoscope_commissions();
-    window.localStorage["currentPage"]="commissionTrombiPage";
+    window.localStorage["currentPage"]="comTrombiPage";
     $.mobile.pageContainer.pagecontainer('change', "#comTrombiPage");
     afficheMenu();
     drawTrombiCom();
@@ -148,10 +148,18 @@ function openStatistiques(){
     afficheMenu();
 }
 
+//fonction appelée ailleurs pour ouvrir proprement la page de gestion des droits
+function openGestionDroits(){
+    WSgestion_droits();
+    window.localStorage["currentPage"]="gestionDroitsPage";
+  $.mobile.pageContainer.pagecontainer('change',"#gestion_droits");
+    afficheMenu();
+}
+
 
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un user
 function openAddUser(){
-    $('#user_browse_picture').html("<input type='file' name='user_picture' id='user_picture'>").enhanceWithin();
+    $('#div_user_browse_picture').html("<input type='file' name='user_browse_picture' id='user_browse_picture'>").enhanceWithin();
     $('#userVisuSurname').html("<input type='text' name='user_surname' id='user_surname'>").enhanceWithin();
     $('#userVisuName').html("<input type='text' name='user_name' id='user_name'>").enhanceWithin();
     $('#userVisuFonction').html("<input type='text' name='user_jcef_function' id='user_jcef_function'>").enhanceWithin();
@@ -175,6 +183,7 @@ function openAddUser(){
     $('#userVisuDernierMontant').html( "<input type='text' name='user_last_amount' id='user_last_amount'>" ).enhanceWithin();
     $('#userVisuQRCode').attr("src","").enhanceWithin();
     $('#userVisuAddButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSadd_user()' data-role='none'>Ajouter</button>" ).enhanceWithin();
+    $('#userVisuEditButton').html("").enhanceWithin();
     //WSadd_user();
     window.localStorage["currentPage"]="addUserPage";
   $.mobile.pageContainer.pagecontainer('change',"#user_profil");
@@ -185,7 +194,7 @@ function openAddUser(){
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un user
 function openEditUser(){
     usr = JSON.parse(window.localStorage["selected_user_profil"]);
-    $('#user_browse_picture').html("<input type='file' name='user_picture' id='user_picture'>").enhanceWithin();
+    $('#div_user_browse_picture').html("<input type='file' name='user_browse_picture' id='user_browse_picture'>").enhanceWithin();
     $('#userVisuSurname').html("<input type='text' name='user_surname' id='user_surname' value='"+usr.user_surname+"'>").enhanceWithin();
     $('#userVisuName').html("<input type='text' name='user_name' id='user_name' value='"+usr.user_name+"'>").enhanceWithin();
     $('#userVisuFonction').html("<input type='text' name='user_jcef_function' id='user_jcef_function' value='"+usr.user_jcef_function+"'>").enhanceWithin();
@@ -220,7 +229,7 @@ function openEditUser(){
 
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
 function openAddEvent(){
-    $('#event_browse_picture').html("<input type='file' name='ev_picture' id='ev_picture'>").enhanceWithin();
+    $('#div_event_browse_picture').html("<input type='file' name='ev_browse_picture' id='ev_browse_picture'>").enhanceWithin();
     $('#eventVisuName').html("<input type='text' name='ev_name' id='ev_name'>").enhanceWithin();
     $('#eventVisuLieu').html("<input type='text' name='ev_address' id='ev_address'>").enhanceWithin();
     $('#eventVisuDate').html( "<input type='text' name='ev_date' id='ev_date'>" ).enhanceWithin();
@@ -233,6 +242,7 @@ function openAddEvent(){
     $('#eventVisuLienCom').html( "<input type='text' name='ev_com_linked' id='ev_com_linked'>" ).enhanceWithin();
     $('#eventVisuListeParticipants').html("").enhanceWithin();
     $('#eventVisuAddButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSadd_event()' data-role='none'>Ajouter</button>" ).enhanceWithin();
+    $('#eventVisuEditButton').html("").enhanceWithin();
     window.localStorage["currentPage"]="addEventPage";
   $.mobile.pageContainer.pagecontainer('change',"#event_profil");
     afficheMenu();
@@ -242,7 +252,7 @@ function openAddEvent(){
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
 function openEditEvent(){
     ev = JSON.parse(window.localStorage["selected_event_profil"]);
-    $('#event_browse_picture').html("<input type='file' name='ev_picture' id='ev_picture' value='"+ev.ev_picture+"'>").enhanceWithin();
+    $('#div_event_browse_picture').html("<input type='file' name='ev_browse_picture' id='ev_browse_picture' value='"+ev.ev_picture+"'>").enhanceWithin();
     $('#eventVisuName').html("<input type='text' name='ev_name' id='ev_name' value='"+ev.ev_name+"'>").enhanceWithin();
     $('#eventVisuLieu').html("<input type='text' name='ev_address' id='ev_address' value='"+ev.ev_address+"'>").enhanceWithin();
     $('#eventVisuDate').html( "<input type='text' name='ev_date' id='ev_date' value='"+ev.ev_date+"'>" ).enhanceWithin();
@@ -265,10 +275,11 @@ function openEditEvent(){
 
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
 function openAddCom(){
-    $('#com_browse_picture').html("<input type='file' name='com_picture' id='com_picture'>").enhanceWithin();
+    $('#div_com_browse_picture').html("<input type='file' name='com_browse_picture' id='com_browse_picture'>").enhanceWithin();
     $('#comVisuName').html("<input type='text' name='com_name' id='com_name'>").enhanceWithin();
     $('#comVisuDescription').html( "<input type='text' name='com_description' id='com_description'>" ).enhanceWithin();
     $('#comVisuAddButton').html("<button data-theme='a' data-form='ui-btn-up-a' class=' ui-btn ui-btn-a ui-btn-icon-left ui-shadow ui-corner-all ui-icon-check' onclick='WSadd_commission()' data-role='none'>Ajouter</button>" ).enhanceWithin();
+    $('#comVisuEditButton').html("").enhanceWithin();
     window.localStorage["currentPage"]="addComPage";
   $.mobile.pageContainer.pagecontainer('change',"#commission_profil");
     afficheMenu();
@@ -278,7 +289,7 @@ function openAddCom(){
 //fonction appelée ailleurs pour ouvrir proprement la page d'ajout d'un event
 function openEditCom(){
     com = JSON.parse(window.localStorage["selected_com_profil"]);
-    $('#com_browse_picture').html("<input type='file' name='com_picture' id='com_picture' value='"+com.com_picture+"'>").enhanceWithin();
+    $('#div_com_browse_picture').html("<input type='file' name='com_browse_picture' id='com_browse_picture' value='"+com.com_picture+"'>").enhanceWithin();
     $('#comVisuName').html("<input type='text' name='com_name' id='com_name' value='"+com.com_name+"'>").enhanceWithin();
     $('#comVisuDescription').html( "<input type='text' name='com_description' id='com_description' value='"+com.com_description+"'>" ).enhanceWithin();
     $('#comVisuAddButton').html("" ).enhanceWithin();
@@ -517,7 +528,7 @@ function WSuser_profil(user_uuid){
                 200: function (res) {
                     window.localStorage["selected_user_profil"] = JSON.stringify(res);
                     //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
-                    $('#user_browse_picture').html("").enhanceWithin();
+                    $('#div_user_browse_picture').html("").enhanceWithin();
                     $('#userVisuImage').attr("src",host+"/"+res.user_picture).enhanceWithin();
                     $('#userVisuSurname').html( res.user_surname ).enhanceWithin();
                     $('#userVisuName').html( res.user_name ).enhanceWithin();
@@ -699,6 +710,7 @@ function WSevent_profil(event_pk){
             async: false,
             statusCode: {
                 200: function (res) {
+                    $('#div_ev_browse_picture').html("").enhanceWithin();
                     $('#eventVisuImage').attr("src",host+"/"+res.ev_picture).enhanceWithin();
                     $('#eventVisuName').html(res.ev_name).enhanceWithin();
                     $('#eventVisuLieu').html(res.ev_address).enhanceWithin();
@@ -841,10 +853,42 @@ function WScom_profil(com_pk){
             async: false,
             statusCode: {
                 200: function (res) {
+                    $('#div_com_browse_picture').html("").enhanceWithin();
                     $('#comVisuImage').attr("src",host+"/"+res.com_picture).enhanceWithin();
                     $('#comVisuName').html(res.com_name).enhanceWithin();
                     $('#comVisuDescription').html(res.com_description).enhanceWithin();
                     window.localStorage["selected_com_profil"] = JSON.stringify(res);
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+            });
+    //} else {
+      //  $("#submit").removeAttr("disabled");
+    //}
+    return false;
+}
+
+
+
+
+//Affiche les détails d'une commission 
+function WSaccept_user(user_uuid){
+    var URL = host + "/Controller/WScom_profil.php";
+    var contentElem;
+    //if(user != '') {
+        $.ajax({
+            type: 'GET',
+            url: URL+"?com_pk="+com_pk,
+            dataType: "json",
+            async: false,
+            statusCode: {
+                200: function (res) {
+                    $('#div_tab_users_attente').html("");
                     },
                 404: function(){
                     self.showAlert(current, "Le serveur ne répond pas.", "erreur");
@@ -982,19 +1026,81 @@ var URL = host + "/Controller/WSstats.php";
 
 
 
+//A MODIF fonction qui permet l'ajout d'un user en append des champs de texte sur la page type de profil user
+function WSgestion_droits(){
+var URL = host + "/Controller/gestion_droits.php";
+    var contentElem;
+    
+        $.ajax({
+            type: 'POST',
+            dataType: "html",
+            url: URL,
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    $('#div_tab_droits').html(res).enhanceWithin();
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+              
+            });
+    
+    return false;
+}
+
+
+
+
 
 //!!!!!! SECTION Fonction métier
 // lancement du scan depuis le plugin
 function startScan() {
     log("dans startscan");
-    //event_actif = JSON.parse(window.localStorage["selected_event_profil"]);
-    //event_pk = event_actif.event_pk;
+    var event_actif = JSON.parse(window.localStorage["selected_event_profil"]);
+    var event_pk = event_actif.event_pk;
+    var user_uuid;
 	cordova.plugins.barcodeScanner.scan(
 		function (result) {
+      user_url = result.text;
+      user_uuid = user_url.substring(48,user_url.length);
 			var s = "Result: " + result.text + "<br/>" +
 			"Format: " + result.format + "<br/>" +
 			"Cancelled: " + result.cancelled;
-			resultDiv.innerHTML = s;
+
+
+    var URL = host + "/Controller/WSattend_event.php";
+    var contentElem;
+    
+        $.ajax({
+            type: 'POST',
+            dataType: "JSON",
+            data: {event_pk:ev_pk,user_uuid:user_uuid},
+            url: URL,
+            async: false,
+            statusCode: {
+                200: function (res) {    
+                    //TODO : Ajouter tous les autres champs pertinents. Attention les id doivent être uniques, ils ne l'étaient pas.
+                    //$('#div_tab_droits').html(res).enhanceWithin();
+                    log("user "+user_uuid+" a ete compte present a event "+ev_pk);
+                    },
+                404: function(){
+                    self.showAlert(current, "Le serveur ne répond pas.", "erreur");
+                    },
+                500: function(){
+                    self.showAlert(current, "erreur interne au serveur, veuillez réessayer plus tard", "erreur");
+                    }
+                    }
+              
+            });
+    
+    return false;
+
 		},
 		function (error) {
 			alert("Scanning failed: " + error);
