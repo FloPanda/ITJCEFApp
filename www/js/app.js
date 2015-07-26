@@ -1076,7 +1076,7 @@ function startScan() {
 			"Format: " + result.format + "<br/>" +
 			"Cancelled: " + result.cancelled;
         log(user_uuid);
-
+            alert(user_uuid);
 //    var URL = host + "/Controller/WSattend_event.php";
 //    var contentElem;
     
