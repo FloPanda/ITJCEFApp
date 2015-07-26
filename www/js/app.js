@@ -1,10 +1,10 @@
 //déclaration des variables globales
-//var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
-var host = "http://localhost/ITJCEFCarte/Site";
+var host = "http://dev-app.jcef-shanghai.com/ITJCEFCarte/Site";
+//var host = "http://localhost/ITJCEFCarte/Site";
 var resultDiv;
 var clickTouch;
 var debug = true;
-var device = false;
+var device = true;
 
 
 //!!!!!! SECTION Initialisation
