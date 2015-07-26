@@ -1054,7 +1054,10 @@ var URL = host + "/Controller/gestion_droits.php";
     return false;
 }
 
-
+//envoi du code du scan au serveur et réception ce qu'il veut
+function WSScanBarcode(event_pk, user_uuid)
+{
+}
 
 
 
@@ -1072,12 +1075,12 @@ function startScan() {
 			var s = "Result: " + result.text + "<br/>" +
 			"Format: " + result.format + "<br/>" +
 			"Cancelled: " + result.cancelled;
+        log(user_uuid);
 
-
-    var URL = host + "/Controller/WSattend_event.php";
-    var contentElem;
+//    var URL = host + "/Controller/WSattend_event.php";
+//    var contentElem;
     
-        $.ajax({
+/*        $.ajax({
             type: 'POST',
             dataType: "JSON",
             data: {event_pk:ev_pk,user_uuid:user_uuid},
@@ -1097,7 +1100,7 @@ function startScan() {
                     }
                     }
               
-            });
+            });*/
     
     return false;
 
